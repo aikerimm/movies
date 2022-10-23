@@ -1,0 +1,37 @@
+html, body {
+  margin: 50px;
+  padding: 0;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-items {
+  list-style: none;
+  display: flex;
+}
+
+.nav-items > li {
+  padding: 10px;
+}
+
+.nav-logo {
+  width: 60px;
+}
+
+.counter {
+  align-items: center;
+  display: flex;
+}
+
+.counterButton {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.footer {
+  margin-top: 30px;
+}
