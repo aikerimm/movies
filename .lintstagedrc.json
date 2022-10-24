@@ -2,6 +2,9 @@
     "*.js": [
       "eslint"
     ],
+    "*.jsx": [
+      "eslint"
+    ],
     "*.html": [
       "eslint"
     ],

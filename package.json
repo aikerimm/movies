@@ -8,7 +8,8 @@
     "build:prod": "webpack --env production",
     "start:dev": "webpack serve --env development",
     "start:prod": "webpack server --env production",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "docs": "jsdoc src -r -d docs"
   },
   "author": "aigerim_mukusheva",
   "license": "ISC",
@@ -24,6 +25,7 @@
     "css-loader": "^6.7.1",
     "dotenv-webpack": "^8.0.1",
     "eslint": "^8.26.0",
+    "eslint-config-google": "^0.14.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-html": "^7.1.0",
     "eslint-plugin-import": "^2.26.0",
