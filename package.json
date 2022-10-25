@@ -1,15 +1,14 @@
 {
   "name": "movies-app",
   "version": "1.0.0",
-  "description": "movies app",
-  "main": "index.js",
+  "description": "Movies app",
+  "main": "index.jsx",
   "scripts": {
     "build:dev": "webpack --env development",
     "build:prod": "webpack --env production",
     "start:dev": "webpack serve --env development",
     "start:prod": "webpack server --env production",
-    "prepare": "husky install",
-    "docs": "jsdoc src -r -d docs"
+    "prepare": "husky install"
   },
   "author": "aigerim_mukusheva",
   "license": "ISC",

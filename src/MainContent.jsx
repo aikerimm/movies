@@ -21,7 +21,6 @@ export default class MainContent extends React.Component {
   };
 
   render () {
-    console.log(JSON.stringify(process.env));
     return (
       <div>
         <Greeting username={this.state.username} />

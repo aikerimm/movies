@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default () => {
-  React.createElement('footer', {className: 'footer'},
-    React.createElement('small', null, '© 2022 Aigerim'));
-};
+const Footer = () => React.createElement('footer', {className: 'footer'},
+  React.createElement('small', null, '© 2022 Aigerim'));
+
+export default Footer; 

@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './assets/logo.svg';
 
-export default () => {
+const App = () => (
   <header>
     <nav className="nav">
       <img src={logo} alt="react-logo" className="nav-logo" />
@@ -11,5 +11,6 @@ export default () => {
         <li>Contact</li>
       </ul>
     </nav>
-  </header>;
-};
+  </header>);
+
+export default App;
