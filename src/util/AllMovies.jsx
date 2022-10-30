@@ -1,0 +1,88 @@
+const AllMovies = [
+  {
+    id: '01',
+    genre: 'Crime',
+    title: 'Pulp Fiction',
+    releaseYear: 1994,
+    imageName: 'pulpFiction.png',
+  },
+  {
+    id: '02',
+    genre: 'Crime',
+    title: 'Kill Bill',
+    releaseYear: 2003,
+    imageName: 'killBill.png',
+  },
+  {
+    id: '03',
+    genre: 'Superhero',
+    title: 'Avengers',
+    releaseYear: 2012,
+    imageName: 'avengers.png',
+  },
+  {
+    id: '04',
+    genre: 'Drama',
+    title: 'Inception',
+    releaseYear: 2010,
+    imageName: 'inception.png',
+  },
+  {
+    id: '05',
+    genre: 'Drama',
+    title: 'Bohemian Rhapsody',
+    releaseYear: 2018,
+    imageName: 'bohemianRhapsody.png',
+  },
+  {
+    id: '06',
+    genre: 'Crime',
+    title: 'Jackie Brown',
+    releaseYear: 1997,
+    imageName: 'jackieBrown.png',
+  },
+  {
+    id: '07',
+    genre: 'Drama',
+    title: 'Reservoir Dogs',
+    releaseYear: 1992,
+    imageName: 'reservoirDogs.png',
+  },
+  {
+    id: '08',
+    genre: 'Comedy',
+    title: 'Four Rooms',
+    releaseYear: 1995,
+    imageName: 'fourRooms.png',
+  },
+  {
+    id: '09',
+    genre: 'Comedy',
+    title: 'Ace Ventura: When Nature Calls',
+    releaseYear: 1995,
+    imageName: 'aceVentura.jpg',
+  },
+  {
+    id: '10',
+    genre: 'Comedy',
+    title: 'Dumb And Dumber',
+    releaseYear: 1994,
+    imageName: 'dumbAndDumber.jpg',
+  },
+  {
+    id: '11',
+    genre: 'Superhero',
+    title: 'Fantastic Four',
+    releaseYear: 2015,
+    imageName: 'fantasticFour.jpg',
+  },
+  {
+    id: '12',
+    genre: 'Superhero',
+    title: 'The Amazing Spider-Man 2',
+    releaseYear: 2014,
+    imageName: 'spiderman.jpg',
+  },
+];
+
+export default AllMovies;

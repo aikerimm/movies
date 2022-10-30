@@ -1,0 +1,32 @@
+.movieCard {
+  display: flex;
+  padding: 5px 5px 5px 5px;
+  flex-wrap: wrap;
+  font-size: 20px;
+  width: 322px;
+}
+
+.titleYear {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.movieCardPoster {
+  width: 322px;
+  height: 455px;
+}
+
+.movieCardTitle {
+  margin-bottom: 0px;
+}
+
+.movieCardYear {
+  margin-bottom: 0px;
+}
+
+.movieCardGenre {
+  width: 100%;
+  margin-top: 5px;
+  font-size: 18px;
+}

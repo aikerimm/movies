@@ -1,0 +1,40 @@
+.moviesPanel {
+  background-color: #232323;
+  padding-top: 30px;
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-bottom: 30px;
+  margin-top: 10px;
+  font-size: 20px;
+}
+
+.moviesList {
+  display: flex;
+  flex-wrap: wrap;
+  height: 1200px;
+  overflow-y: auto;
+  justify-content: flex-start;
+  align-content: flex-start;
+  column-gap: 50px;
+}
+
+.moviesPanelSelectors {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sortTypeLabel {
+  margin-right: 10px;
+  font-size: 18px;
+  font-weight: 200;
+  text-transform: uppercase;
+}
+
+.genreRadioOption {
+  margin-left: 10px;
+}
+
+select,
+select option {
+  text-transform: uppercase;
+}
