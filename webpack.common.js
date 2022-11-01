@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -9,7 +10,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name][contenthash].js',
     clean: true,
-    assetModuleFilename: '[name][ext]',
+    assetModuleFilename: 'assets/[name][ext]',
   },
   module: {
     rules: [
@@ -17,14 +18,14 @@ module.exports = {
         test: /\.jsx$/,
         exclude: /node_modules/,
         resolve: {
-          extensions: ['.js', '.jsx']
+          extensions: ['.js', '.jsx'],
         },
         use: {
           loader: 'babel-loader',
           options: {
             presets: [
               '@babel/preset-env',
-              ['@babel/preset-react', {runtime: 'automatic'}],
+              ['@babel/preset-react', { runtime: 'automatic' }],
             ],
           },
         },
@@ -34,7 +35,7 @@ module.exports = {
         use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.svg$/i,
+        test: /\.(svg|png)$/i,
         type: 'asset/resource',
       },
     ],
@@ -44,7 +45,10 @@ module.exports = {
       title: 'Movies App',
       filename: 'index.html',
       template: 'src/template.html',
-      minify: {collapseWhitespace: true},
+      minify: { collapseWhitespace: true },
+    }),
+    new CopyPlugin({
+      patterns: [{ from: 'src/assets', to: '' }],
     }),
   ],
 };

@@ -1,0 +1,70 @@
+.header {
+  background-image: url('./header.png');
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 25px 50px 100px 50px;
+  background-blend-mode: darken;
+  background-color: #0005;
+  flex-direction: column;
+  font-size: 20px;
+}
+
+.headerTitle {
+  color: #f65261;
+}
+
+.addMovieBtn {
+  color: #f65261;
+  background-color: #606060;
+  opacity: 0.68;
+  border: none;
+  padding-left: 32px;
+  padding-right: 32px;
+  font-weight: 900;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+.headerPrompt {
+  width: 100%;
+  margin-left: 50px;
+  font-size: 30px;
+  text-transform: uppercase;
+}
+
+.headerTop {
+  display: flex;
+  padding-right: 50px;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.search {
+  display: flex;
+  padding-left: 50px;
+  padding-right: 100px;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.searchInput {
+  background-color: #323232;
+  border: none;
+  padding: 10px;
+  opacity: 80%;
+  width: 90%;
+}
+
+.searchBtn {
+  background-color: #f65261;
+  border: none;
+  padding-left: 32px;
+  padding-right: 32px;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+.roundedCorners {
+  border-radius: 5px;
+}

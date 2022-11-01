@@ -1,13 +1,17 @@
 import './App.css';
-import Header from './Header';
-import MainContent from './MainContent';
-import Footer from './Footer';
+import Header from './header/Header.jsx';
+import Footer from './footer/Footer.jsx';
+import MoviesPanel from './moviesPanel/MoviesPanel.jsx';
+import ErrorBoundary from './util/ErrorBoundary.jsx';
 
-const App = () => 
-  (<div id="page">
+const App = () => (
+  <>
     <Header />
-    <MainContent />
+    <ErrorBoundary>
+      <MoviesPanel />
+    </ErrorBoundary>
     <Footer />
-  </div>);
+  </>
+);
 
 export default App;
