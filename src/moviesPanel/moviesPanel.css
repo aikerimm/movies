@@ -1,9 +1,9 @@
 .moviesPanel {
   background-color: #232323;
-  padding-top: 30px;
-  padding-left: 25px;
-  padding-right: 25px;
-  padding-bottom: 30px;
+  padding-top: 20px;
+  padding-left: 60px;
+  padding-right: 60px;
+  padding-bottom: 70px;
   margin-top: 10px;
   font-size: 20px;
 }
@@ -16,25 +16,29 @@
   justify-content: flex-start;
   align-content: flex-start;
   column-gap: 50px;
+  row-gap: 50px;
+  padding-top: 20px;
 }
 
 .moviesPanelSelectors {
   display: flex;
   justify-content: space-between;
+  padding-bottom: 20px;
 }
 
 .sortTypeLabel {
-  margin-right: 10px;
   font-size: 18px;
   font-weight: 200;
   text-transform: uppercase;
 }
 
 .genreRadioOption {
-  margin-left: 10px;
+  padding-right: 20px;
+  padding-left: 5px;
 }
 
-select,
-select option {
+.sortTypeSelect select,
+.sortTypeSelect select option {
   text-transform: uppercase;
+  background-color: #232323;
 }

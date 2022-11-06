@@ -1,0 +1,24 @@
+.deleteMovieModal {
+  width: 50%;
+  position: fixed;
+  top: 25%;
+  left: 25%;
+  background-color: #232323;
+  opacity: 1;
+  padding-left: 80px;
+  padding-top: 60px;
+  padding-bottom: 70px;
+  padding-right: 100px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 60px;
+}
+
+.promptText {
+  color: white;
+}
+
+.deleteConfirmDiv {
+  display: flex;
+  justify-content: flex-end;
+}

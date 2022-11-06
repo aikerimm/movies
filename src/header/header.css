@@ -26,13 +26,6 @@
   text-transform: uppercase;
 }
 
-.headerPrompt {
-  width: 100%;
-  margin-left: 50px;
-  font-size: 30px;
-  text-transform: uppercase;
-}
-
 .headerTop {
   display: flex;
   padding-right: 50px;
@@ -42,8 +35,6 @@
 
 .search {
   display: flex;
-  padding-left: 50px;
-  padding-right: 100px;
   gap: 10px;
   justify-content: space-between;
 }
@@ -56,15 +47,7 @@
   width: 90%;
 }
 
-.searchBtn {
-  background-color: #f65261;
-  border: none;
-  padding-left: 32px;
-  padding-right: 32px;
-  font-size: 16px;
-  text-transform: uppercase;
-}
-
-.roundedCorners {
-  border-radius: 5px;
+.findYourMovie {
+  padding-left: 50px;
+  padding-right: 100px;
 }

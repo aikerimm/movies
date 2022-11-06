@@ -1,0 +1,74 @@
+.modalContainer {
+  width: 80%;
+  position: relative;
+  background-color: #232323;
+  opacity: 1;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 30px;
+  padding-bottom: 20px;
+  overflow-y: auto;
+  top: 20%;
+  left: 10%;
+  max-height: 100%;
+}
+
+.btnContainer {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  width: 100%;
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+.blackBtn {
+  background-color: #232323;
+  padding-left: 32px;
+  padding-right: 32px;
+  font-size: 16px;
+  text-transform: uppercase;
+  border-color: #f65261;
+}
+
+.addMovieForm {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.formInput {
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  padding-top: 10px;
+}
+
+.formInput label {
+  color: #f65261;
+  text-transform: uppercase;
+}
+
+.formInput input {
+  background-color: #323232;
+  border: none;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.formInput select {
+  background-color: #323232;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.overviewInput {
+  width: 100%;
+  grid-column-start: 1;
+  grid-column-end: 3;
+}

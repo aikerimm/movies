@@ -4,11 +4,13 @@
   flex-wrap: wrap;
   font-size: 20px;
   width: 322px;
+  position: relative;
 }
 
 .titleYear {
   display: flex;
   justify-content: space-between;
+  gap: 20px;
   width: 100%;
 }
 
@@ -17,16 +19,19 @@
   height: 455px;
 }
 
-.movieCardTitle {
-  margin-bottom: 0px;
-}
-
-.movieCardYear {
-  margin-bottom: 0px;
-}
-
 .movieCardGenre {
   width: 100%;
   margin-top: 5px;
   font-size: 18px;
+}
+
+.contextMenuIcon {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  display: none;
+}
+
+.movieCard:hover .contextMenuIcon {
+  display: block;
 }
