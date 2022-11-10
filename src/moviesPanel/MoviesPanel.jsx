@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AllMovies from '../util/AllMovies.jsx';
 import MoviesList from './MoviesList.jsx';
 import './moviesPanel.css';
@@ -14,11 +14,14 @@ const sortByType = (sortType, a, b) => {
 const MoviesPanel = () => {
   const [genre, setGenre] = useState('All');
   const [sortType, setSortType] = useState('releaseDate');
+  const [movies, setMovies] = useState([]);
 
-  const filteredMovies = () =>
-    AllMovies.filter(
+  useEffect(() => {
+    const filteredMovies = AllMovies.filter(
       (movie) => genre === 'All' || movie.genre.includes(genre)
     ).sort((a, b) => sortByType(sortType, a, b));
+    setMovies(filteredMovies);
+  }, [AllMovies, genre, sortType]);
 
   return (
     <div className='moviesPanel'>
@@ -84,7 +87,7 @@ const MoviesPanel = () => {
           </select>
         </div>
       </div>
-      <MoviesList getMovies={filteredMovies} />
+      <MoviesList movies={movies} />
     </div>
   );
 };

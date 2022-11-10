@@ -1,20 +1,23 @@
 import PropTypes from 'prop-types';
 import './movieModal.css';
 import AddMovieSuccessModal from './AddMovieSuccessModal';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
+import Button from '../util/Button';
 
-const MovieModal = ({ open, onClose, title, movieForm }) => {
+const MovieModal = ({ open, onClose, title, movieForm, showSuccessModal }) => {
   if (!open) return null;
   const [openSuccessModal, setOpenSuccessModal] = useState(false);
+  const handleCloseAddMovieSuccessModal = useCallback(() => {
+    setOpenSuccessModal(false);
+    onClose();
+  }, []);
+  const handleSuccessfullSubmit = useCallback(() => {
+    if (showSuccessModal) {
+      setOpenSuccessModal(true);
+    }
+  }, []);
   if (openSuccessModal) {
-    return (
-      <AddMovieSuccessModal
-        onClose={() => {
-          setOpenSuccessModal(false);
-          onClose();
-        }}
-      />
-    );
+    return <AddMovieSuccessModal onClose={handleCloseAddMovieSuccessModal} />;
   }
   return (
     <div className='overlay' onClick={onClose}>
@@ -29,20 +32,12 @@ const MovieModal = ({ open, onClose, title, movieForm }) => {
         <form className='addMovieForm'>
           {movieForm}
           <div className='btnContainer'>
-            <input
-              type='button'
-              value='Reset'
-              className='blackBtn roundedCorners'
-            ></input>
+            <Button value='Reset' type='cancel' />
             <input
               type='submit'
               value='Submit'
-              className='redBtn roundedCorners'
-              onClick={() => {
-                if (title === 'Add movie') {
-                  setOpenSuccessModal(true);
-                }
-              }}
+              className='submit roundedCorners'
+              onClick={handleSuccessfullSubmit}
             ></input>
           </div>
         </form>
@@ -56,10 +51,12 @@ MovieModal.propTypes = {
   onClose: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
   movieForm: PropTypes.element,
+  showSuccessModal: PropTypes.bool,
 };
 
 MovieModal.defaultProps = {
   open: false,
+  showSuccessModal: false,
 };
 
 export default MovieModal;

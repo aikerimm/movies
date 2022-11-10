@@ -1,30 +1,32 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import './header.css';
 import MovieModal from '../modal/MovieModal.jsx';
 import MovieForm from '../modal/MovieForm';
+import Button from '../util/Button';
 
 const Header = () => {
   const [openAddMovieModal, setOpenAddMovieModal] = useState(false);
+  const handleOpenAddMovieModal = useCallback(() => setOpenAddMovieModal(true), []);
+  const handleCloseAddMovieModal = useCallback(() => setOpenAddMovieModal(false), []);
+
   return (
     <div className='header'>
       <div className='headerTop'>
         <p className='headerTitle'>
           <b>netflix</b>roulette
         </p>
-        <input
-          type='button'
-          value='+ Add movie'
-          className='addMovieBtn roundedCorners'
-          onClick={() => setOpenAddMovieModal(true)}
-        ></input>
+        <Button value='+ Add movie' type='add' onClick={handleOpenAddMovieModal} />
       </div>
       <div className='findYourMovie'>
-        <MovieModal
-          open={openAddMovieModal}
-          onClose={() => setOpenAddMovieModal(false)}
-          title='Add movie'
-          movieForm=<MovieForm />
-        />
+        {openAddMovieModal && (
+          <MovieModal
+            open={openAddMovieModal}
+            onClose={handleCloseAddMovieModal}
+            title='Add movie'
+            showSuccessModal={true}
+            movieForm=<MovieForm />
+          />
+        )}
         <p className='titleText fullWidth'>Find your movie</p>
         <div className='search'>
           <input
@@ -32,11 +34,7 @@ const Header = () => {
             placeholder='What do you want to watch?'
             className='searchInput roundedCorners'
           ></input>
-          <input
-            type='button'
-            value='search'
-            className='redBtn roundedCorners'
-          ></input>
+          <Button value='search' type='submit' />
         </div>
       </div>
     </div>

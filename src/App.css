@@ -55,7 +55,7 @@ select {
   width: 100%;
 }
 
-.redBtn {
+.submitBtn {
   background-color: #f65261;
   border: none;
   padding-left: 32px;

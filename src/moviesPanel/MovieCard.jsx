@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import './movieCard.css';
 import ContextMenu from '../modal/ContextMenu.jsx';
@@ -9,6 +9,10 @@ const MovieCard = ({ title, imageName, genre, releaseDate }) => {
   const [openContextMenu, setOpenContextMenu] = useState(false);
   const movieForm = (
     <MovieForm movieTitle={title} releaseDate={releaseDate} genre={genre} />
+  );
+  const handleContextMenuClose = useCallback(
+    () => setOpenContextMenu(false),
+    []
   );
   return (
     <div className='movieCard'>
@@ -27,7 +31,7 @@ const MovieCard = ({ title, imageName, genre, releaseDate }) => {
       />
       <ContextMenu
         open={openContextMenu}
-        onClose={() => setOpenContextMenu(false)}
+        onClose={handleContextMenuClose}
         movieForm={movieForm}
       />
     </div>

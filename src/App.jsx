@@ -1,4 +1,4 @@
-import './App.css';
+import './app.css';
 import Header from './header/Header.jsx';
 import Footer from './footer/Footer.jsx';
 import MoviesPanel from './moviesPanel/MoviesPanel.jsx';

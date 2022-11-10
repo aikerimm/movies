@@ -1,5 +1,6 @@
 import './movieModal.css';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 const MovieForm = ({
   movieTitle,
@@ -97,4 +98,4 @@ MovieForm.propTypes = {
   overview: PropTypes.string,
 };
 
-export default MovieForm;
+export default React.memo(MovieForm);
