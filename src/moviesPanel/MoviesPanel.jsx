@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import AllMovies from '../util/AllMovies.jsx';
 import MoviesList from './MoviesList.jsx';
+import PropTypes from 'prop-types';
 import './moviesPanel.css';
 
 const sortByType = (sortType, a, b) => {
@@ -11,7 +12,8 @@ const sortByType = (sortType, a, b) => {
   return a.title > b.title ? 1 : -1;
 };
 
-const MoviesPanel = () => {
+const MoviesPanel = ({ onMovieClick }) => {
+  console.log('render movies panel');
   const [genre, setGenre] = useState('All');
   const [sortType, setSortType] = useState('releaseDate');
   const [movies, setMovies] = useState([]);
@@ -21,7 +23,7 @@ const MoviesPanel = () => {
       (movie) => genre === 'All' || movie.genre.includes(genre)
     ).sort((a, b) => sortByType(sortType, a, b));
     setMovies(filteredMovies);
-  }, [AllMovies, genre, sortType]);
+  }, [genre, sortType]);
 
   return (
     <div className='moviesPanel'>
@@ -87,9 +89,13 @@ const MoviesPanel = () => {
           </select>
         </div>
       </div>
-      <MoviesList movies={movies} />
+      <MoviesList movies={movies} onMovieClick={onMovieClick} />
     </div>
   );
+};
+
+MoviesPanel.propTypes = {
+  onMovieClick: PropTypes.func.isRequired,
 };
 
 export default React.memo(MoviesPanel);

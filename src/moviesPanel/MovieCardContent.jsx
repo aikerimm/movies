@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const MovieCardContent = ({ title, imageName, genre, releaseDate }) => {
+const MovieCardContent = ({
+  movie: { imageName, title, releaseDate, genre },
+}) => {
   return (
     <>
       <img src={imageName} alt='moviePoster' className='movieCardPoster' />
@@ -15,10 +17,12 @@ const MovieCardContent = ({ title, imageName, genre, releaseDate }) => {
 };
 
 MovieCardContent.propTypes = {
-  title: PropTypes.string.isRequired,
-  imageName: PropTypes.string.isRequired,
-  releaseDate: PropTypes.instanceOf(Date).isRequired,
-  genre: PropTypes.array.isRequired,
+  movie: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    imageName: PropTypes.string.isRequired,
+    releaseDate: PropTypes.instanceOf(Date).isRequired,
+    genre: PropTypes.arrayOf(PropTypes.string).isRequired,
+  }),
 };
 
 export default React.memo(MovieCardContent);

@@ -3,19 +3,22 @@ import PropTypes from 'prop-types';
 import DeleteMovieModal from './DeleteMovieModal.jsx';
 import MovieModal from './MovieModal.jsx';
 import { useCallback, useState } from 'react';
+import React from 'react';
 
-const ContextMenu = ({ open, onClose, movieForm }) => {
-  if (!open) return null;
+const ContextMenu = ({ onClose, movieForm }) => {
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
+
   const handleEditModalClose = useCallback(() => {
     setOpenEditModal(false);
     onClose();
-  }, []);
+  }, [onClose]);
+
   const handleDeleteModalClose = useCallback(() => {
     setOpenDeleteModal(false);
     onClose();
-  }, []);
+  }, [onClose]);
+
   return (
     <div className='contextMenuDiv'>
       <p className='closeBtn' onClick={onClose}>
@@ -31,12 +34,13 @@ const ContextMenu = ({ open, onClose, movieForm }) => {
         open={openDeleteModal}
         onClose={handleDeleteModalClose}
       />
-      <MovieModal
-        open={openEditModal}
-        onClose={handleEditModalClose}
-        title='Edit movie'
-        movieForm={movieForm}
-      />
+      {openEditModal ? (
+        <MovieModal
+          onClose={handleEditModalClose}
+          title='Edit movie'
+          movieForm={movieForm}
+        />
+      ) : null}
     </div>
   );
 };
@@ -51,4 +55,4 @@ ContextMenu.propTypes = {
   movieForm: PropTypes.element.isRequired,
 };
 
-export default ContextMenu;
+export default React.memo(ContextMenu);
