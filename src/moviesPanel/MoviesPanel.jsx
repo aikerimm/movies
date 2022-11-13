@@ -1,7 +1,7 @@
 /* eslint-disable require-jsdoc */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AllMovies from '../util/AllMovies.jsx';
-import MovieCard from './MovieCard.jsx';
+import MoviesList from './MoviesList.jsx';
 import './moviesPanel.css';
 
 const sortByType = (sortType, a, b) => {
@@ -12,80 +12,82 @@ const sortByType = (sortType, a, b) => {
 };
 
 const MoviesPanel = () => {
-  const [ genre, setGenre ] = useState('All');
-  const [ sortType, setSortType] = useState('releaseDate');
+  const [genre, setGenre] = useState('All');
+  const [sortType, setSortType] = useState('releaseDate');
+  const [movies, setMovies] = useState([]);
 
-  const filteredMovies = AllMovies.filter(
-    (movie) => genre === 'All' || movie.genre === genre
-  )
-    .sort((a, b) => sortByType(sortType, a, b))
-    .map(({ id, title, imageName, genre, releaseYear }) => (
-      <MovieCard
-        key={id}
-        title={title}
-        imageName={imageName}
-        genre={genre}
-        releaseYear={releaseYear}
-      />
-    ));
-
-  const counterMessage =
-    filteredMovies.length == 1
-      ? filteredMovies.length + ' movie found'
-      : filteredMovies.length + ' movies found';
+  useEffect(() => {
+    const filteredMovies = AllMovies.filter(
+      (movie) => genre === 'All' || movie.genre.includes(genre)
+    ).sort((a, b) => sortByType(sortType, a, b));
+    setMovies(filteredMovies);
+  }, [AllMovies, genre, sortType]);
 
   return (
     <div className='moviesPanel'>
       <div className='moviesPanelSelectors'>
-        <div>
+        <div className='genreRadioDiv'>
           <input
+            id='genreAll'
             type='radio'
             checked={genre === 'All'}
-            className='genreRadioOption'
             onChange={() => setGenre('All')}
           />
-          All
+          <label htmlFor='genreAll' className='genreRadioOption'>
+            All
+          </label>
           <input
+            id='genreDrama'
             type='radio'
             checked={genre === 'Drama'}
-            className='genreRadioOption'
             onChange={() => setGenre('Drama')}
           />
-          Drama
+          <label htmlFor='genreDrama' className='genreRadioOption'>
+            Drama
+          </label>
           <input
+            id='genreComedy'
             type='radio'
             checked={genre === 'Comedy'}
-            className='genreRadioOption'
             onChange={() => setGenre('Comedy')}
           />
-          Comedy
+          <label htmlFor='genreComedy' className='genreRadioOption'>
+            Comedy
+          </label>
           <input
+            id='genreSuperhero'
             type='radio'
             checked={genre === 'Superhero'}
-            className='genreRadioOption'
             onChange={() => setGenre('Superhero')}
           />
-          Superhero
+          <label htmlFor='genreSuperhero' className='genreRadioOption'>
+            Superhero
+          </label>
           <input
+            id='genreCrime'
             type='radio'
             checked={genre === 'Crime'}
-            className='genreRadioOption'
             onChange={() => setGenre('Crime')}
           />
-          Crime
+          <label htmlFor='genreCrime' className='genreRadioOption'>
+            Crime
+          </label>
         </div>
-        <div>
+        <div className='sortTypeSelect'>
           <label htmlFor='sortType' className='sortTypeLabel'>
             Sort by
           </label>
-          <select name='sortType' id='sortType' onChange={({target: {value}}) => setSortType(value)}>
+          <select
+            name='sortType'
+            id='sortType'
+            onChange={({ target: { value } }) => setSortType(value)}
+          >
             <option value='releaseDate'>Release Date</option>
             <option value='title'>Title</option>
           </select>
         </div>
       </div>
-      <p className='moviesCounter'>{counterMessage}</p>
-      <div className='moviesList'>{filteredMovies}</div>
+      <MoviesList movies={movies} />
     </div>
   );
 };
