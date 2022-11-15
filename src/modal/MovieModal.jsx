@@ -18,12 +18,7 @@ const MovieModal = ({ onClose, title, movieForm, onSubmit }) => {
           {movieForm}
           <div className='btnContainer'>
             <Button value='Reset' type='cancel' />
-            <input
-              type='submit'
-              value='Submit'
-              className='submitBtn roundedCorners'
-              onClick={onSubmit}
-            ></input>
+            <Button value='Submit' type='submit' onClick={onSubmit}/> 
           </div>
         </form>
       </div>

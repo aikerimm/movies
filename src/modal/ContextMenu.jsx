@@ -24,23 +24,32 @@ const ContextMenu = ({ onClose, movieForm }) => {
       <p className='closeBtn' onClick={onClose}>
         X
       </p>
-      <p className='contextMenuOption' onClick={() => setOpenEditModal(true)}>
+      <p
+        id='contextMenuEdit'
+        className='contextMenuOption'
+        onClick={() => setOpenEditModal(true)}
+      >
         Edit
       </p>
-      <p className='contextMenuOption' onClick={() => setOpenDeleteModal(true)}>
+      <p
+        id='contextMenuDelete'
+        className='contextMenuOption'
+        onClick={() => setOpenDeleteModal(true)}
+      >
         Delete
       </p>
       <DeleteMovieModal
         open={openDeleteModal}
         onClose={handleDeleteModalClose}
       />
-      {openEditModal ? (
+      {openEditModal && (
         <MovieModal
           onClose={handleEditModalClose}
           title='Edit movie'
           movieForm={movieForm}
+          onSubmit={handleEditModalClose}
         />
-      ) : null}
+      )}
     </div>
   );
 };

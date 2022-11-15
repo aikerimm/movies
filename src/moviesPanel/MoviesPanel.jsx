@@ -13,7 +13,6 @@ const sortByType = (sortType, a, b) => {
 };
 
 const MoviesPanel = ({ onMovieClick }) => {
-  console.log('render movies panel');
   const [genre, setGenre] = useState('All');
   const [sortType, setSortType] = useState('releaseDate');
   const [movies, setMovies] = useState([]);

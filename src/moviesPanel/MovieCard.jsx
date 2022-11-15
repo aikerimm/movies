@@ -7,20 +7,14 @@ import MovieCardContent from './MovieCardContent';
 
 const MovieCard = ({ movie, onMovieClick }) => {
   const [openContextMenu, setOpenContextMenu] = useState(false);
-  const movieForm = (
-    <MovieForm
-      movieTitle={movie.title}
-      releaseDate={movie.releaseDate}
-      genre={movie.genre}
-    />
-  );
+  const movieForm = <MovieForm movie={movie} />;
   const handleContextMenuClose = useCallback(
     () => setOpenContextMenu(false),
     []
   );
   return (
-    <div className='movieCard' onClick={() => onMovieClick(movie)}>
-      <MovieCardContent movie={movie} />
+    <div className='movieCard'>
+      <MovieCardContent movie={movie} onMovieClick={onMovieClick} />
       <img
         id='contextMenuIcon'
         src='contextMenu.svg'
@@ -28,9 +22,9 @@ const MovieCard = ({ movie, onMovieClick }) => {
         className='contextMenuIcon'
         onClick={() => setOpenContextMenu(true)}
       />
-      {openContextMenu ? (
+      {openContextMenu && (
         <ContextMenu onClose={handleContextMenuClose} movieForm={movieForm} />
-      ) : null}
+      )}
     </div>
   );
 };

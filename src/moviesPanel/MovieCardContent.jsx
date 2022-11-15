@@ -1,17 +1,20 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const MovieCardContent = ({
-  movie: { imageName, title, releaseDate, genre },
-}) => {
+const MovieCardContent = ({ movie, onMovieClick }) => {
   return (
     <>
-      <img src={imageName} alt='moviePoster' className='movieCardPoster' />
+      <img
+        src={movie.imageName}
+        alt='moviePoster'
+        className='movieCardPoster'
+        onClick={() => onMovieClick(movie)}
+      />
       <div className='titleYear'>
-        <p className='movieCardTitle'>{title}</p>
-        <p className='movieCardYear'>{releaseDate.getFullYear()}</p>
+        <p className='movieCardTitle'>{movie.title}</p>
+        <p className='movieCardYear'>{movie.releaseDate.getFullYear()}</p>
       </div>
-      <p className='movieCardGenre'>{genre}</p>
+      <p className='movieCardGenre'>{movie.genre}</p>
     </>
   );
 };
@@ -23,6 +26,7 @@ MovieCardContent.propTypes = {
     releaseDate: PropTypes.instanceOf(Date).isRequired,
     genre: PropTypes.arrayOf(PropTypes.string).isRequired,
   }),
+  onMovieClick: PropTypes.func.isRequired,
 };
 
 export default React.memo(MovieCardContent);

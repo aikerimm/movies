@@ -21,6 +21,7 @@ const Header = () => {
   }, []);
   const handleAddMovieSuccessModalClose = useCallback(() => {
     setOpenSuccessModal(false);
+    setOpenAddMovieModal(false);
   }, []);
 
   return (
@@ -55,9 +56,9 @@ const Header = () => {
           movieForm=<MovieForm />
         />
       )}
-      {openSuccessModal ? (
+      {openSuccessModal && (
         <AddMovieSuccessModal onClose={handleAddMovieSuccessModalClose} />
-      ) : null}
+      )}
     </div>
   );
 };
