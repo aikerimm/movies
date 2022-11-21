@@ -1,0 +1,53 @@
+.movieDetails {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.movieDetailsHeader {
+  background-color: #232323;
+  padding-top: 20px;
+  padding-left: 60px;
+  padding-right: 60px;
+  padding-bottom: 20px;
+}
+
+.circle {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 50%;
+  border-color: white;
+  border-style: solid;
+  border-width: 2px;
+  font-size: 15px;
+  text-align: center;
+}
+
+.movieDetailsTopPanel {
+  display: flex;
+  justify-content: space-between;
+}
+
+.movieDetailsHorizonalDisplay {
+  display: flex;
+  align-items: center;
+  column-gap: 20px;
+}
+
+.movieDetailsGenre {
+  font-size: 16px;
+}
+
+.redText {
+  color: #f65261;
+}
+
+.movieDetailsContent {
+  display: flex;
+  column-gap: 20px;
+}
+
+.searchIcon:hover {
+  filter: hue-rotate(85deg);
+}

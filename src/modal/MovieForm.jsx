@@ -3,24 +3,21 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 const MovieForm = ({
-  movieTitle,
-  releaseDate,
-  movieUrl,
-  rating,
-  genre,
-  runtime,
-  overview,
+  movie: {
+    title,
+    releaseDate,
+    movieUrl,
+    rating,
+    genre,
+    runtime,
+    overview,
+  } = {},
 }) => {
   return (
     <>
       <div className='formInput'>
         <label htmlFor='title'>Title</label>
-        <input
-          type='text'
-          id='title'
-          name='title'
-          defaultValue={movieTitle}
-        ></input>
+        <input type='text' id='title' name='title' defaultValue={title}></input>
       </div>
       <div className='formInput'>
         <label htmlFor='releaseDate'>Release Date</label>
@@ -89,13 +86,15 @@ const MovieForm = ({
 };
 
 MovieForm.propTypes = {
-  movieTitle: PropTypes.string,
-  releaseDate: PropTypes.instanceOf(Date),
-  movieUrl: PropTypes.string,
-  rating: PropTypes.number,
-  genre: PropTypes.array,
-  runtime: PropTypes.number,
-  overview: PropTypes.string,
+  movie: PropTypes.shape({
+    title: PropTypes.string,
+    releaseDate: PropTypes.instanceOf(Date),
+    movieUrl: PropTypes.string,
+    rating: PropTypes.number,
+    genre: PropTypes.array,
+    runtime: PropTypes.number,
+    overview: PropTypes.string,
+  }),
 };
 
 export default React.memo(MovieForm);

@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import '../app.css';
+import React from 'react';
 
 const Button = ({ value, type, onClick }) => {
   const cssClass = type + 'Btn roundedCorners';
@@ -22,4 +23,4 @@ Button.propTypes = {
   onClick: PropTypes.func,
 };
 
-export default Button;
+export default React.memo(Button);

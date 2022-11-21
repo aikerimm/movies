@@ -1,28 +1,17 @@
-import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import MovieCard from './MovieCard';
+import React from 'react';
+import { useMoviesCounter } from '../util/MoviesCounterHook.jsx';
 
-const MoviesList = ({ movies }) => {
-  const [counter, setCounter] = useState('0 movies found');
-
-  useEffect(() => {
-    let counterMessage =
-      movies.length + (movies.length == 1 ? ' movie found' : ' movies found');
-    setCounter(counterMessage);
-  }, [movies]);
+const MoviesList = ({ movies, onMovieClick }) => {
+  const counter = useMoviesCounter(movies);
 
   return (
     <>
       <p className='moviesCounter'>{counter}</p>
       <div className='moviesList'>
-        {movies.map(({ id, title, imageName, genre, releaseDate }) => (
-          <MovieCard
-            key={id}
-            title={title}
-            imageName={imageName}
-            genre={genre}
-            releaseDate={releaseDate}
-          />
+        {movies.map((movie) => (
+          <MovieCard key={movie.id} movie={movie} onMovieClick={onMovieClick} />
         ))}
       </div>
     </>
@@ -31,6 +20,7 @@ const MoviesList = ({ movies }) => {
 
 MoviesList.propTypes = {
   movies: PropTypes.array.isRequired,
+  onMovieClick: PropTypes.func.isRequired,
 };
 
-export default MoviesList;
+export default React.memo(MoviesList);

@@ -1,24 +1,9 @@
 import PropTypes from 'prop-types';
 import './movieModal.css';
-import AddMovieSuccessModal from './AddMovieSuccessModal';
-import { useCallback, useState } from 'react';
 import Button from '../util/Button';
+import React from 'react';
 
-const MovieModal = ({ open, onClose, title, movieForm, showSuccessModal }) => {
-  if (!open) return null;
-  const [openSuccessModal, setOpenSuccessModal] = useState(false);
-  const handleCloseAddMovieSuccessModal = useCallback(() => {
-    setOpenSuccessModal(false);
-    onClose();
-  }, []);
-  const handleSuccessfullSubmit = useCallback(() => {
-    if (showSuccessModal) {
-      setOpenSuccessModal(true);
-    }
-  }, []);
-  if (openSuccessModal) {
-    return <AddMovieSuccessModal onClose={handleCloseAddMovieSuccessModal} />;
-  }
+const MovieModal = ({ onClose, title, movieForm, onSubmit }) => {
   return (
     <div className='overlay' onClick={onClose}>
       <div
@@ -33,12 +18,7 @@ const MovieModal = ({ open, onClose, title, movieForm, showSuccessModal }) => {
           {movieForm}
           <div className='btnContainer'>
             <Button value='Reset' type='cancel' />
-            <input
-              type='submit'
-              value='Submit'
-              className='submit roundedCorners'
-              onClick={handleSuccessfullSubmit}
-            ></input>
+            <Button value='Submit' type='submit' onClick={onSubmit}/> 
           </div>
         </form>
       </div>
@@ -51,7 +31,7 @@ MovieModal.propTypes = {
   onClose: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
   movieForm: PropTypes.element,
-  showSuccessModal: PropTypes.bool,
+  onSubmit: PropTypes.func,
 };
 
 MovieModal.defaultProps = {
@@ -59,4 +39,4 @@ MovieModal.defaultProps = {
   showSuccessModal: false,
 };
 
-export default MovieModal;
+export default React.memo(MovieModal);

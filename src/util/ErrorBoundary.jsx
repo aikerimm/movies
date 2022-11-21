@@ -18,4 +18,4 @@ ErrorBoundary.propTypes = {
   ]).isRequired,
 };
 
-export default ErrorBoundary;
+export default React.memo(ErrorBoundary);

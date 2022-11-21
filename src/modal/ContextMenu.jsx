@@ -3,40 +3,53 @@ import PropTypes from 'prop-types';
 import DeleteMovieModal from './DeleteMovieModal.jsx';
 import MovieModal from './MovieModal.jsx';
 import { useCallback, useState } from 'react';
+import React from 'react';
 
-const ContextMenu = ({ open, onClose, movieForm }) => {
-  if (!open) return null;
+const ContextMenu = ({ onClose, movieForm }) => {
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
+
   const handleEditModalClose = useCallback(() => {
     setOpenEditModal(false);
     onClose();
-  }, []);
+  }, [onClose]);
+
   const handleDeleteModalClose = useCallback(() => {
     setOpenDeleteModal(false);
     onClose();
-  }, []);
+  }, [onClose]);
+
   return (
     <div className='contextMenuDiv'>
       <p className='closeBtn' onClick={onClose}>
         X
       </p>
-      <p className='contextMenuOption' onClick={() => setOpenEditModal(true)}>
+      <p
+        id='contextMenuEdit'
+        className='contextMenuOption'
+        onClick={() => setOpenEditModal(true)}
+      >
         Edit
       </p>
-      <p className='contextMenuOption' onClick={() => setOpenDeleteModal(true)}>
+      <p
+        id='contextMenuDelete'
+        className='contextMenuOption'
+        onClick={() => setOpenDeleteModal(true)}
+      >
         Delete
       </p>
       <DeleteMovieModal
         open={openDeleteModal}
         onClose={handleDeleteModalClose}
       />
-      <MovieModal
-        open={openEditModal}
-        onClose={handleEditModalClose}
-        title='Edit movie'
-        movieForm={movieForm}
-      />
+      {openEditModal && (
+        <MovieModal
+          onClose={handleEditModalClose}
+          title='Edit movie'
+          movieForm={movieForm}
+          onSubmit={handleEditModalClose}
+        />
+      )}
     </div>
   );
 };
@@ -51,4 +64,4 @@ ContextMenu.propTypes = {
   movieForm: PropTypes.element.isRequired,
 };
 
-export default ContextMenu;
+export default React.memo(ContextMenu);

@@ -1,10 +1,12 @@
 import React from 'react';
 import './footer.css';
 
-const Footer = () => (
-  <footer className='footer'>
-    <b>netflix</b>roulette
-  </footer>
-);
+const Footer = () => {
+  return (
+    <footer className='footer'>
+      <b>netflix</b>roulette
+    </footer>
+  );
+};
 
-export default Footer;
+export default React.memo(Footer);

@@ -90,3 +90,8 @@ select {
   top: 0;
   left: 0;
 }
+
+.movieCardPoster {
+  width: 245px;
+  height: 350px;
+}

@@ -5,23 +5,16 @@ import ContextMenu from '../modal/ContextMenu.jsx';
 import MovieForm from '../modal/MovieForm';
 import MovieCardContent from './MovieCardContent';
 
-const MovieCard = ({ title, imageName, genre, releaseDate }) => {
+const MovieCard = ({ movie, onMovieClick }) => {
   const [openContextMenu, setOpenContextMenu] = useState(false);
-  const movieForm = (
-    <MovieForm movieTitle={title} releaseDate={releaseDate} genre={genre} />
-  );
+  const movieForm = <MovieForm movie={movie} />;
   const handleContextMenuClose = useCallback(
     () => setOpenContextMenu(false),
     []
   );
   return (
     <div className='movieCard'>
-      <MovieCardContent
-        title={title}
-        imageName={imageName}
-        genre={genre}
-        releaseDate={releaseDate}
-      />
+      <MovieCardContent movie={movie} onMovieClick={onMovieClick} />
       <img
         id='contextMenuIcon'
         src='contextMenu.svg'
@@ -29,20 +22,16 @@ const MovieCard = ({ title, imageName, genre, releaseDate }) => {
         className='contextMenuIcon'
         onClick={() => setOpenContextMenu(true)}
       />
-      <ContextMenu
-        open={openContextMenu}
-        onClose={handleContextMenuClose}
-        movieForm={movieForm}
-      />
+      {openContextMenu && (
+        <ContextMenu onClose={handleContextMenuClose} movieForm={movieForm} />
+      )}
     </div>
   );
 };
 
 MovieCard.propTypes = {
-  title: PropTypes.string.isRequired,
-  imageName: PropTypes.string.isRequired,
-  releaseDate: PropTypes.instanceOf(Date).isRequired,
-  genre: PropTypes.array.isRequired,
+  movie: PropTypes.object.isRequired,
+  onMovieClick: PropTypes.func.isRequired,
 };
 
 export default React.memo(MovieCard);
