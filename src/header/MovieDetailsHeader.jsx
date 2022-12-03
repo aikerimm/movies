@@ -1,9 +1,16 @@
 import './header.css';
 import './movieDetails.css';
 import MovieDetails from './MovieDetails';
-import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { movieSelected } from '../util/moviesSlice.jsx';
+import { useCallback } from 'react';
 
-const MovieDetailsHeader = ({ onSearchClick, movie }) => {
+const MovieDetailsHeader = () => {
+  const dispatch = useDispatch();
+  const onSearchClick = useCallback(() => {
+    dispatch(movieSelected(null));
+  }, [dispatch]);
+  const movie = useSelector((state) => state.movies.selectedMovie);
   return (
     <div className='movieDetailsHeader'>
       <div className='movieDetailsTopPanel'>
@@ -22,11 +29,6 @@ const MovieDetailsHeader = ({ onSearchClick, movie }) => {
       </div>
     </div>
   );
-};
-
-MovieDetailsHeader.propTypes = {
-  onSearchClick: PropTypes.func.isRequired,
-  movie: PropTypes.object,
 };
 
 export default MovieDetailsHeader;

@@ -35,8 +35,23 @@
   padding-left: 5px;
 }
 
+.sortTypeSelect {
+  display: flex;
+  justify-content: center;
+}
+
 .sortTypeSelect select,
 .sortTypeSelect select option {
   text-transform: uppercase;
   background-color: #232323;
+  padding-left: 10px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.sortDirection:hover {
+  color: #f65261;
 }

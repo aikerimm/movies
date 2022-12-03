@@ -1,13 +1,14 @@
 import React from 'react';
-import AllMovies from './AllMovies.jsx';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 
 const ErrorBoundary = (props) => {
+  const movies = useSelector(state => state.movies.data);
   const FallbackText = () => (
-    <h2>Oops, something went wrong. Please try again later.</h2>
+    <h2>Oops, no movies were found.</h2>
   );
 
-  let isOk = AllMovies.length > 0;
+  let isOk = movies.data.length > 0;
   return <>{isOk ? props.children : <FallbackText />}</>;
 };
 
