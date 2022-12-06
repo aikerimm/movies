@@ -1,26 +1,20 @@
-import PropTypes from 'prop-types';
 import MovieCard from './MovieCard';
 import React from 'react';
-import { useMoviesCounter } from '../util/MoviesCounterHook.jsx';
+import { useSelector } from 'react-redux';
+import { getMoviesData } from '../util/moviesSlice';
 
-const MoviesList = ({ movies, onMovieClick }) => {
-  const counter = useMoviesCounter(movies);
-
+const MoviesList = () => {
+  const movies = useSelector(getMoviesData);
   return (
     <>
-      <p className='moviesCounter'>{counter}</p>
+      <p className='moviesCounter'>{movies.totalAmount} movies found</p>
       <div className='moviesList'>
-        {movies.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} onMovieClick={onMovieClick} />
+        {movies.data.map((movie) => (
+          <MovieCard key={movie.id} movie={movie} />
         ))}
       </div>
     </>
   );
-};
-
-MoviesList.propTypes = {
-  movies: PropTypes.array.isRequired,
-  onMovieClick: PropTypes.func.isRequired,
 };
 
 export default React.memo(MoviesList);

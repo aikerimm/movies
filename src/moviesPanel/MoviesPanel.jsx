@@ -1,100 +1,47 @@
 /* eslint-disable require-jsdoc */
-import React, { useEffect, useState } from 'react';
-import AllMovies from '../util/AllMovies.jsx';
+import React, { useCallback, useEffect, useState } from 'react';
 import MoviesList from './MoviesList.jsx';
-import PropTypes from 'prop-types';
 import './moviesPanel.css';
+import { useDispatch } from 'react-redux';
+import ErrorBoundary from '../util/ErrorBoundary.jsx';
+import { fetchMovies } from '../util/moviesSlice.jsx';
+import Pagination from './Pagination.jsx';
+import GenreSelector from './GenreSelector.jsx';
+import SortTypeSelector from './SortTypeSelector.jsx';
 
-const sortByType = (sortType, a, b) => {
-  if (sortType === 'releaseDate') {
-    return a.releaseYear > b.releaseYear ? 1 : -1;
-  }
-  return a.title > b.title ? 1 : -1;
-};
-
-const MoviesPanel = ({ onMovieClick }) => {
+const MoviesPanel = () => {
   const [genre, setGenre] = useState('All');
-  const [sortType, setSortType] = useState('releaseDate');
-  const [movies, setMovies] = useState([]);
-
+  const [sortType, setSortType] = useState(null);
+  const [sortDirection, setSortDirection] = useState('asc');
+  const [page, setPage] = useState(1);
+  const dispatch = useDispatch();
+  const onPageDecrement = useCallback(() => setPage(page - 1), [page]);
+  const onPageIncrement = useCallback(() => setPage(page + 1), [page]);
+  const onGenreChanged = useCallback((newGenre) => setGenre(newGenre), []);
+  const onSortChanged = useCallback((newSort, newDirection) => {
+    setSortDirection(newDirection);
+    setSortType(newSort);
+  }, []);
   useEffect(() => {
-    const filteredMovies = AllMovies.filter(
-      (movie) => genre === 'All' || movie.genre.includes(genre)
-    ).sort((a, b) => sortByType(sortType, a, b));
-    setMovies(filteredMovies);
-  }, [genre, sortType]);
+    dispatch(fetchMovies({ genre, sortType, sortDirection, page }));
+  }, [genre, sortType, sortDirection, page, dispatch]);
 
   return (
     <div className='moviesPanel'>
       <div className='moviesPanelSelectors'>
-        <div className='genreRadioDiv'>
-          <input
-            id='genreAll'
-            type='radio'
-            checked={genre === 'All'}
-            onChange={() => setGenre('All')}
-          />
-          <label htmlFor='genreAll' className='genreRadioOption'>
-            All
-          </label>
-          <input
-            id='genreDrama'
-            type='radio'
-            checked={genre === 'Drama'}
-            onChange={() => setGenre('Drama')}
-          />
-          <label htmlFor='genreDrama' className='genreRadioOption'>
-            Drama
-          </label>
-          <input
-            id='genreComedy'
-            type='radio'
-            checked={genre === 'Comedy'}
-            onChange={() => setGenre('Comedy')}
-          />
-          <label htmlFor='genreComedy' className='genreRadioOption'>
-            Comedy
-          </label>
-          <input
-            id='genreSuperhero'
-            type='radio'
-            checked={genre === 'Superhero'}
-            onChange={() => setGenre('Superhero')}
-          />
-          <label htmlFor='genreSuperhero' className='genreRadioOption'>
-            Superhero
-          </label>
-          <input
-            id='genreCrime'
-            type='radio'
-            checked={genre === 'Crime'}
-            onChange={() => setGenre('Crime')}
-          />
-          <label htmlFor='genreCrime' className='genreRadioOption'>
-            Crime
-          </label>
-        </div>
-        <div className='sortTypeSelect'>
-          <label htmlFor='sortType' className='sortTypeLabel'>
-            Sort by
-          </label>
-          <select
-            name='sortType'
-            id='sortType'
-            onChange={({ target: { value } }) => setSortType(value)}
-          >
-            <option value='releaseDate'>Release Date</option>
-            <option value='title'>Title</option>
-          </select>
-        </div>
+        <GenreSelector currentGenre={genre} onGenreChanged={onGenreChanged} />
+        <SortTypeSelector sortType={sortType} sortDirection={sortDirection} onSortChanged={onSortChanged} />
       </div>
-      <MoviesList movies={movies} onMovieClick={onMovieClick} />
+      <ErrorBoundary>
+        <MoviesList />
+        <Pagination
+          page={page}
+          onPageDecrement={onPageDecrement}
+          onPageIncrement={onPageIncrement}
+        />
+      </ErrorBoundary>
     </div>
   );
-};
-
-MoviesPanel.propTypes = {
-  onMovieClick: PropTypes.func.isRequired,
 };
 
 export default React.memo(MoviesPanel);
