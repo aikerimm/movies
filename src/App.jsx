@@ -4,19 +4,15 @@ import Footer from './footer/Footer.jsx';
 import MoviesPanel from './moviesPanel/MoviesPanel.jsx';
 import MovieDetailsHeader from './header/MovieDetailsHeader';
 import { useSelector } from 'react-redux';
+import { getSelectedMovie } from './util/moviesSlice';
 
 const App = () => {
-
-  const selectedMovie = useSelector(state => state.movies.selectedMovie);
+  const selectedMovie = useSelector(getSelectedMovie);
 
   return (
     <>
-      {selectedMovie ? (
-        <MovieDetailsHeader/>
-      ) : (
-        <Header />
-      )}
-      <MoviesPanel/>
+      {selectedMovie ? <MovieDetailsHeader /> : <Header />}
+      <MoviesPanel />
       <Footer />
     </>
   );

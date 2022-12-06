@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
+import { getMoviesData } from './moviesSlice';
 
 const ErrorBoundary = (props) => {
-  const movies = useSelector(state => state.movies.data);
-  const FallbackText = () => (
-    <h2>Oops, no movies were found.</h2>
-  );
+  const movies = useSelector(getMoviesData);
+  const FallbackText = () => <h2>Oops, no movies were found.</h2>;
 
   let isOk = movies.data.length > 0;
   return <>{isOk ? props.children : <FallbackText />}</>;

@@ -1,9 +1,10 @@
 import MovieCard from './MovieCard';
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { getMoviesData } from '../util/moviesSlice';
 
 const MoviesList = () => {
-  const movies = useSelector((state) => state.movies.data);
+  const movies = useSelector(getMoviesData);
   return (
     <>
       <p className='moviesCounter'>{movies.totalAmount} movies found</p>

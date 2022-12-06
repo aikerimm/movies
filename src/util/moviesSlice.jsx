@@ -48,5 +48,13 @@ export const fetchMovie = createAsyncThunk(
   }
 );
 
+export const getSelectedMovie = (state) => {
+  return state.movies.selectedMovie;
+};
+
+export const getMoviesData = (state) => {
+  return state.movies.data;
+};
+
 export default moviesSlice.reducer;
 export const { movieSelected } = moviesSlice.actions;

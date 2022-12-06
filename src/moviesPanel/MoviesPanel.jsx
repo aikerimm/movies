@@ -29,7 +29,7 @@ const MoviesPanel = () => {
   return (
     <div className='moviesPanel'>
       <div className='moviesPanelSelectors'>
-        <GenreSelector genre={genre} onGenreChanged={onGenreChanged} />
+        <GenreSelector currentGenre={genre} onGenreChanged={onGenreChanged} />
         <SortTypeSelector sortType={sortType} sortDirection={sortDirection} onSortChanged={onSortChanged} />
       </div>
       <ErrorBoundary>

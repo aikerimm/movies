@@ -2,7 +2,7 @@ import './header.css';
 import './movieDetails.css';
 import MovieDetails from './MovieDetails';
 import { useDispatch, useSelector } from 'react-redux';
-import { movieSelected } from '../util/moviesSlice.jsx';
+import { getSelectedMovie, movieSelected } from '../util/moviesSlice.jsx';
 import { useCallback } from 'react';
 
 const MovieDetailsHeader = () => {
@@ -10,7 +10,7 @@ const MovieDetailsHeader = () => {
   const onSearchClick = useCallback(() => {
     dispatch(movieSelected(null));
   }, [dispatch]);
-  const movie = useSelector((state) => state.movies.selectedMovie);
+  const movie = useSelector(getSelectedMovie);
   return (
     <div className='movieDetailsHeader'>
       <div className='movieDetailsTopPanel'>
