@@ -1,15 +1,13 @@
 import React, { useCallback, useState } from 'react';
-import {useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import './movieCard.css';
 import ContextMenu from '../modal/ContextMenu.jsx';
-import MovieForm from '../modal/MovieForm';
 import MovieCardContent from './MovieCardContent';
-import {fetchMovie} from '../util/moviesSlice.jsx';
+import { fetchMovie } from '../util/moviesSlice.jsx';
 
 const MovieCard = ({ movie }) => {
   const [openContextMenu, setOpenContextMenu] = useState(false);
-  const movieForm = <MovieForm movie={movie} />;
   const handleContextMenuClose = useCallback(
     () => setOpenContextMenu(false),
     []
@@ -17,7 +15,7 @@ const MovieCard = ({ movie }) => {
   const dispatch = useDispatch();
   const onMovieCardClick = useCallback(() => {
     dispatch(fetchMovie(movie.id));
-    window.scroll(0,0);
+    window.scroll(0, 0);
   }, [dispatch, movie.id]);
 
   return (
@@ -31,14 +29,14 @@ const MovieCard = ({ movie }) => {
         onClick={() => setOpenContextMenu(true)}
       />
       {openContextMenu && (
-        <ContextMenu onClose={handleContextMenuClose} movieForm={movieForm} />
+        <ContextMenu onClose={handleContextMenuClose} movie={movie} />
       )}
     </div>
   );
 };
 
 MovieCard.propTypes = {
-  movie: PropTypes.object.isRequired
+  movie: PropTypes.object.isRequired,
 };
 
 export default React.memo(MovieCard);

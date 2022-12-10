@@ -4,10 +4,24 @@ import DeleteMovieModal from './DeleteMovieModal.jsx';
 import MovieModal from './MovieModal.jsx';
 import { useCallback, useState } from 'react';
 import React from 'react';
+import {
+  sendDeleteMovieRequest,
+  sendEditMovieRequest,
+} from '../util/apiService';
 
-const ContextMenu = ({ onClose, movieForm }) => {
+const ContextMenu = ({ onClose, movie }) => {
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
+
+  const handleEditModalSubmit = useCallback(
+    (values, id) => {
+      return sendEditMovieRequest(values, id)
+        .then(setOpenEditModal(false))
+        .then(onClose())
+        .then(window.location.reload());
+    },
+    [onClose]
+  );
 
   const handleEditModalClose = useCallback(() => {
     setOpenEditModal(false);
@@ -18,6 +32,21 @@ const ContextMenu = ({ onClose, movieForm }) => {
     setOpenDeleteModal(false);
     onClose();
   }, [onClose]);
+
+  const handleDeleteModalSubmit = useCallback(
+    (movieId) => {
+      sendDeleteMovieRequest(movieId).then((response) => {
+        if (response.status == 204) {
+          setOpenDeleteModal(false);
+          onClose();
+          window.location.reload();
+        } else {
+          alert('Error deleting movie. See network tab.');
+        }
+      });
+    },
+    [onClose]
+  );
 
   return (
     <div className='contextMenuDiv'>
@@ -41,27 +70,24 @@ const ContextMenu = ({ onClose, movieForm }) => {
       <DeleteMovieModal
         open={openDeleteModal}
         onClose={handleDeleteModalClose}
+        movieId={movie.id}
+        onDelete={handleDeleteModalSubmit}
       />
       {openEditModal && (
         <MovieModal
           onClose={handleEditModalClose}
-          title='Edit movie'
-          movieForm={movieForm}
-          onSubmit={handleEditModalClose}
+          modalTitle='Edit movie'
+          movie={movie}
+          onSubmit={handleEditModalSubmit}
         />
       )}
     </div>
   );
 };
 
-ContextMenu.defaultProps = {
-  open: false,
-};
-
 ContextMenu.propTypes = {
-  open: PropTypes.bool,
   onClose: PropTypes.func.isRequired,
-  movieForm: PropTypes.element.isRequired,
+  movie: PropTypes.object.isRequired,
 };
 
 export default React.memo(ContextMenu);

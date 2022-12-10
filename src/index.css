@@ -7,3 +7,7 @@ html,
 body {
   background-color: #888888;
 }
+
+.redText {
+  color: #f65261;
+}

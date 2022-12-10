@@ -5,7 +5,6 @@ import GenreInput from './GenreInput';
 const genres = ['All', 'Drama', 'Comedy', 'Adventure', 'Horror'];
 
 const GenreSelector = ({ currentGenre, onGenreChanged }) => {
-  console.log('currentGenre=' + currentGenre);
   return (
     <div className='genreRadioDiv'>
       {genres.map((genre) => (
