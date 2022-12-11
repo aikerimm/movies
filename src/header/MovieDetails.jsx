@@ -1,7 +1,15 @@
 import PropTypes from 'prop-types';
 
 const MovieDetails = ({
-  movie: { poster_path, title, vote_average, runtime, genres, release_date, overview},
+  movie: {
+    poster_path,
+    title,
+    vote_average,
+    runtime,
+    genres,
+    release_date,
+    overview,
+  },
 }) => {
   return (
     <>
@@ -31,7 +39,7 @@ MovieDetails.propTypes = {
     vote_average: PropTypes.number,
     runtime: PropTypes.number.isRequired,
     genres: PropTypes.arrayOf(PropTypes.string).isRequired,
-    release_date: PropTypes.instanceOf(Date).isRequired,
+    release_date: PropTypes.string.isRequired,
     overview: PropTypes.string,
   }),
 };

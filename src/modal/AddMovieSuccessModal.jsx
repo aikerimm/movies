@@ -8,7 +8,7 @@ const AddMovieSuccessModal = ({ onClose }) => {
         className='successContainer'
         onClick={(event) => event.stopPropagation()}
       >
-        <img src='success.svg' className='successIcon' alt='success' />
+        <img src='/success.svg' className='successIcon' alt='success' />
         <p className='closeBtn' onClick={onClose}>
           X
         </p>
