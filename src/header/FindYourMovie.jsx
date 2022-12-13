@@ -13,9 +13,7 @@ const FindYourMovie = () => {
     navigate(`/search/${searchInput}?${searchParams.toString()}`);
   }, [navigate, searchParams, searchInput]);
 
-  const handleInputChange = useCallback((e) => {
-    setSearchInput(e.target.value);
-  }, []);
+  const handleInputChange = useCallback((e) => setSearchInput(e.target.value), []);
 
   const handleEnterOnSearch = useCallback(
     (e) => {

@@ -8,19 +8,21 @@ import {
   sendDeleteMovieRequest,
   sendEditMovieRequest,
 } from '../util/apiService';
+import { useNavigate } from 'react-router';
 
 const ContextMenu = ({ onClose, movie }) => {
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
+  const navigate = useNavigate();
 
   const handleEditModalSubmit = useCallback(
     (values, id) => {
       return sendEditMovieRequest(values, id)
         .then(setOpenEditModal(false))
         .then(onClose())
-        .then(window.location.reload());
+        .then(navigate(0));
     },
-    [onClose]
+    [onClose, navigate]
   );
 
   const handleEditModalClose = useCallback(() => {
@@ -34,18 +36,17 @@ const ContextMenu = ({ onClose, movie }) => {
   }, [onClose]);
 
   const handleDeleteModalSubmit = useCallback(
-    (movieId) => {
-      sendDeleteMovieRequest(movieId).then((response) => {
-        if (response.status == 204) {
-          setOpenDeleteModal(false);
-          onClose();
-          window.location.reload();
-        } else {
-          alert('Error deleting movie. See network tab.');
-        }
-      });
+    async (movieId) => {
+      await sendDeleteMovieRequest(movieId)
+        .then((response) => {
+          if (response.status == 204) {
+            navigate(0);
+          } else {
+            alert('Error deleting movie. See network tab.');
+          }
+        });
     },
-    [onClose]
+    [navigate]
   );
 
   return (
