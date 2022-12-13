@@ -28,13 +28,14 @@ export const moviesSlice = createSlice({
 
 export const fetchMovies = createAsyncThunk(
   'movies/fetchMovies',
-  async ({ genre, sortType, sortDirection, page }) => {
+  async ({ query, genre, sortType, sortDirection, page }) => {
     let offset = (page ? page - 1 : 0) * 12;
     let url =
       'http://localhost:4000/movies?limit=12&offset=' +
       offset +
       (sortType ? '&sortBy=' + sortType + '&sortOrder=' + sortDirection : '') +
-      (genre && genre !== 'All' ? '&filter=' + genre : '');
+      (genre && genre !== 'All' ? '&filter=' + genre : '') +
+      (query ? '&search=' + query : '');
     return fetch(url).then((response) => response.json());
   }
 );

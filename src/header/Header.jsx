@@ -4,10 +4,14 @@ import MovieModal from '../modal/MovieModal.jsx';
 import Button from '../util/Button';
 import AddMovieSuccessModal from '../modal/AddMovieSuccessModal.jsx';
 import { sendAddMovieRequest } from '../util/apiService';
+import FindYourMovie from './FindYourMovie';
+import { useNavigate } from 'react-router';
 
 const Header = () => {
   const [openAddMovieModal, setOpenAddMovieModal] = useState(false);
   const [openSuccessModal, setOpenSuccessModal] = useState(false);
+  const navigate = useNavigate();
+
   const handleOpenAddMovieModal = useCallback(
     () => setOpenAddMovieModal(true),
     []
@@ -26,10 +30,8 @@ const Header = () => {
     });
   }, []);
   const handleAddMovieSuccessModalClose = useCallback(() => {
-    setOpenSuccessModal(false);
-    setOpenAddMovieModal(false);
-    window.location.reload();
-  }, []);
+    navigate(0);
+  }, [navigate]);
 
   return (
     <div className='header'>
@@ -43,17 +45,7 @@ const Header = () => {
           onClick={handleOpenAddMovieModal}
         />
       </div>
-      <div className='findYourMovie'>
-        <p className='titleText fullWidth'>Find your movie</p>
-        <div className='search'>
-          <input
-            type='text'
-            placeholder='What do you want to watch?'
-            className='searchInput roundedCorners'
-          ></input>
-          <Button value='search' type='submit' />
-        </div>
-      </div>
+      <FindYourMovie />
       {openAddMovieModal && (
         <MovieModal
           onClose={handleCloseAddMovieModal}

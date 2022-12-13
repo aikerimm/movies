@@ -11,6 +11,7 @@ module.exports = {
     filename: '[name][contenthash].js',
     clean: true,
     assetModuleFilename: 'assets/[name][ext]',
+    publicPath: '/'
   },
   module: {
     rules: [

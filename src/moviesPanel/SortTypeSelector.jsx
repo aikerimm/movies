@@ -13,7 +13,9 @@ const SortTypeSelector = ({ sortType, sortDirection, onSortChanged }) => {
         onChange={({ target: { value } }) =>
           onSortChanged(value, sortDirection)
         }
+        value={sortType || ''}
       >
+        <option value=''>Select: </option>
         <option value='release_date'>Release Date</option>
         <option value='title'>Title</option>
         <option value='vote_average'>Rating</option>
