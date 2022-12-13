@@ -25,6 +25,16 @@ const ContextMenu = ({ onClose, movie }) => {
     [onClose, navigate]
   );
 
+  const handleEditModalSubmit = useCallback(
+    (values, id) => {
+      return sendEditMovieRequest(values, id)
+        .then(setOpenEditModal(false))
+        .then(onClose())
+        .then(window.location.reload());
+    },
+    [onClose]
+  );
+
   const handleEditModalClose = useCallback(() => {
     setOpenEditModal(false);
     onClose();

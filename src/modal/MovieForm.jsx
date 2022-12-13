@@ -23,6 +23,7 @@ const validate = (values) => {
   if (values.runtime && !/^[0-9]{1,3}$/.test(values.runtime)) {
     text += 'Runtime should be a number between 0 and 999. ';
   }
+
   if (values.vote_average) {
     let voteAverage = Number.parseFloat(values.vote_average);
     if (isNaN(values.vote_average) || voteAverage < 0 || voteAverage > 10) {

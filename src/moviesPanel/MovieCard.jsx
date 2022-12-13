@@ -10,6 +10,7 @@ import { useSearchParams } from 'react-router-dom';
 const MovieCard = ({ movie }) => {
   const [openContextMenu, setOpenContextMenu] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
+  
   const handleContextMenuClose = useCallback(
     () => setOpenContextMenu(false),
     []
