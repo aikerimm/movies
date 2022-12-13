@@ -1,75 +1,142 @@
-import './movieModal.css';
+import { useFormik } from 'formik';
 import PropTypes from 'prop-types';
-import React from 'react';
+import Button from '../util/Button';
+import allGenres from '../util/allGenres';
+
+const validate = (values) => {
+  let text = '';
+  if (!values.overview) {
+    text += 'Overview can not be empty. ';
+  }
+  if (!values.title) {
+    text += 'Title can not be empty. ';
+  }
+  if (!values.release_date) {
+    text += 'Release date can not be empty. ';
+  }
+  if (!values.poster_path) {
+    text += 'Movie url can not be empty. ';
+  }
+  if (!values.genres || values.genres.length == 0) {
+    text += 'At least 1 genre is required. ';
+  }
+  if (values.runtime && !/^[0-9]{1,3}$/.test(values.runtime)) {
+    text += 'Runtime should be a number between 0 and 999. ';
+  }
+  if (values.vote_average && !/^[0-9]{1,2}\.[0-9]$/.test(values.vote_average)) {
+    text += 'Rating should be a number between 0.0 and 10.0. ';
+  }
+  return text === '' ? {} : { text: text };
+};
 
 const MovieForm = ({
   movie: {
     title,
-    releaseDate,
-    movieUrl,
-    rating,
-    genre,
-    runtime,
+    release_date,
+    genres,
     overview,
-  } = {},
+    runtime,
+    vote_average,
+    poster_path,
+    id,
+  } = {
+    title: '',
+    release_date: '',
+    genres: [],
+    overview: '',
+    runtime: '',
+    vote_average: '',
+    poster_path: '',
+  },
+  onMovieFormSubmit,
 }) => {
+  const formik = useFormik({
+    initialValues: {
+      title: title,
+      poster_path: poster_path,
+      release_date: release_date,
+      vote_average: vote_average,
+      genres: genres,
+      runtime: runtime,
+      overview: overview,
+    },
+    onSubmit: async (values) => {
+      await onMovieFormSubmit(values, id);
+    },
+    validate: validate,
+  });
+
   return (
-    <>
+    <form onSubmit={formik.handleSubmit} className='addMovieForm'>
       <div className='formInput'>
         <label htmlFor='title'>Title</label>
-        <input type='text' id='title' name='title' defaultValue={title}></input>
+        <input
+          id='title'
+          type='text'
+          name='title'
+          placeholder='Movie Title'
+          onChange={formik.handleChange}
+          value={formik.values.title}
+        />
       </div>
       <div className='formInput'>
-        <label htmlFor='releaseDate'>Release Date</label>
+        <label htmlFor='release_date'>Release Date</label>
         <input
+          id='release_date'
           type='date'
-          id='releaseDate'
-          name='releaseDate'
-          defaultValue={releaseDate ? releaseDate.toJSON().slice(0, 10) : null}
-        ></input>
+          name='release_date'
+          onChange={formik.handleChange}
+          value={formik.values.release_date}
+        />
       </div>
       <div className='formInput'>
         <label htmlFor='movieUrl'>Movie Url</label>
         <input
+          id='poster_path'
           type='url'
-          name='movieUrl'
-          id='movieUrl'
+          name='poster_path'
           placeholder='https://'
-          defaultValue={movieUrl}
-        ></input>
+          onChange={formik.handleChange}
+          value={formik.values.poster_path}
+        />
       </div>
       <div className='formInput'>
-        <label htmlFor='rating'>Rating</label>
+        <label htmlFor='vote_average'>Rating</label>
         <input
+          id='vote_average'
           type='text'
-          id='rating'
-          name='rating'
-          pattern='^[0-9]\.[0-9]$'
-          title='Range: 0.0-9.9'
-          defaultValue={rating}
-        ></input>
+          name='vote_average'
+          placeholder='for ex. 9.9'
+          onChange={formik.handleChange}
+          value={formik.values.vote_average}
+        />
       </div>
       <div className='formInput'>
-        <label htmlFor='genre'>Genre</label>
-        <select id='genre' name='genre' defaultValue={genre} multiple>
-          <option value=''>Select Genre</option>
-          <option value='Drama'>Drama</option>
-          <option value='Comedy'>Comedy</option>
-          <option value='Superhero'>Superhero</option>
-          <option value='Crime'>Crime</option>
+        <label htmlFor='genres'>Genre</label>
+        <select
+          id='genres'
+          name='genres'
+          multiple
+          onChange={formik.handleChange}
+          value={formik.values.genres}
+        >
+          {allGenres.map((genre) => (
+            <option key={genre} value={genre}>
+              {genre}
+            </option>
+          ))}
         </select>
       </div>
       <div className='formInput'>
         <label htmlFor='runtime'>Runtime</label>
         <input
-          type='text'
           id='runtime'
+          type='text'
           name='runtime'
-          pattern='^[0-9]*'
-          placeholder='minutes'
-          title='Positive number'
-          defaultValue={runtime}
-        ></input>
+          placeholder='in minutes'
+          onChange={formik.handleChange}
+          value={formik.values.runtime}
+        />
       </div>
       <div className='formInput overviewInput'>
         <label htmlFor='overview'>Overview</label>
@@ -78,23 +145,31 @@ const MovieForm = ({
           name='overview'
           rows='4'
           placeholder='Movie Description'
-          defaultValue={overview}
-        ></textarea>
+          onChange={formik.handleChange}
+          value={formik.values.overview}
+        />
       </div>
-    </>
+      {formik.errors.text && <p className='redText'>{formik.errors.text}</p>}
+      <div className='btnContainer'>
+        <Button value='Reset' type='cancel' onClick={formik.handleReset} />
+        <Button value='Submit' type='submit' isFormSubmit={true} />
+      </div>
+    </form>
   );
 };
 
 MovieForm.propTypes = {
+  onMovieFormSubmit: PropTypes.func,
   movie: PropTypes.shape({
     title: PropTypes.string,
-    releaseDate: PropTypes.instanceOf(Date),
-    movieUrl: PropTypes.string,
-    rating: PropTypes.number,
-    genre: PropTypes.array,
+    release_date: PropTypes.string,
+    poster_path: PropTypes.string,
+    vote_average: PropTypes.number,
+    genres: PropTypes.arrayOf(PropTypes.string),
     runtime: PropTypes.number,
     overview: PropTypes.string,
+    id: PropTypes.number.isRequired,
   }),
 };
 
-export default React.memo(MovieForm);
+export default MovieForm;

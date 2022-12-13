@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import './movieModal.css';
-import Button from '../util/Button';
 import React from 'react';
+import MovieForm from './MovieForm';
 
-const MovieModal = ({ onClose, title, movieForm, onSubmit }) => {
+const MovieModal = ({ onClose, modalTitle, onSubmit, movie }) => {
   return (
     <div className='overlay' onClick={onClose}>
       <div
@@ -13,29 +13,21 @@ const MovieModal = ({ onClose, title, movieForm, onSubmit }) => {
         <p className='closeBtn' onClick={onClose}>
           X
         </p>
-        <p className='titleText fullWidth'>{title}</p>
-        <form className='addMovieForm'>
-          {movieForm}
-          <div className='btnContainer'>
-            <Button value='Reset' type='cancel' />
-            <Button value='Submit' type='submit' onClick={onSubmit}/> 
-          </div>
-        </form>
+        <p className='titleText fullWidth'>{modalTitle}</p>
+        <MovieForm movie={movie} onMovieFormSubmit={onSubmit} />
       </div>
     </div>
   );
 };
 
 MovieModal.propTypes = {
-  open: PropTypes.bool,
   onClose: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired,
-  movieForm: PropTypes.element,
-  onSubmit: PropTypes.func,
+  modalTitle: PropTypes.string.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  movie: PropTypes.object,
 };
 
 MovieModal.defaultProps = {
-  open: false,
   showSuccessModal: false,
 };
 

@@ -1,9 +1,9 @@
 import React, { useCallback, useState } from 'react';
 import './header.css';
 import MovieModal from '../modal/MovieModal.jsx';
-import MovieForm from '../modal/MovieForm';
 import Button from '../util/Button';
 import AddMovieSuccessModal from '../modal/AddMovieSuccessModal.jsx';
+import { sendAddMovieRequest } from '../util/apiService';
 
 const Header = () => {
   const [openAddMovieModal, setOpenAddMovieModal] = useState(false);
@@ -16,12 +16,19 @@ const Header = () => {
     () => setOpenAddMovieModal(false),
     []
   );
-  const handleAddMovieFormSubmit = useCallback(() => {
-    setOpenSuccessModal(true);
+  const handleAddMovieFormSubmit = useCallback((values) => {
+    return sendAddMovieRequest(values).then((response) => {
+      if (response.status == 201) {
+        setOpenSuccessModal(true);
+      } else {
+        alert('Error adding movie. See network tab.');
+      }
+    });
   }, []);
   const handleAddMovieSuccessModalClose = useCallback(() => {
     setOpenSuccessModal(false);
     setOpenAddMovieModal(false);
+    window.location.reload();
   }, []);
 
   return (
@@ -49,11 +56,9 @@ const Header = () => {
       </div>
       {openAddMovieModal && (
         <MovieModal
-          open={openAddMovieModal}
           onClose={handleCloseAddMovieModal}
-          title='Add movie'
+          modalTitle='Add movie'
           onSubmit={handleAddMovieFormSubmit}
-          movieForm=<MovieForm />
         />
       )}
       {openSuccessModal && (
