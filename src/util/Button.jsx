@@ -3,7 +3,7 @@ import '../app.css';
 import React from 'react';
 
 const Button = ({ value, type, onClick, isFormSubmit = false }) => {
-  const cssClass = type + 'Btn roundedCorners';
+  const cssClass = `${type}Btn roundedCorners`;
   if (isFormSubmit) {
     return (
       <button type='submit' className={cssClass}>
