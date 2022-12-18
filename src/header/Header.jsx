@@ -34,7 +34,7 @@ const Header = () => {
   }, [navigate]);
 
   return (
-    <div className='header'>
+    <div className='header' id='searchHeader'>
       <div className='headerTop'>
         <p className='headerTitle'>
           <b>netflix</b>roulette

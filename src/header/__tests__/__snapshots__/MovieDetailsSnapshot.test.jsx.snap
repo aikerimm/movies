@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MovieDetails renders correctly 1`] = `
+[
+  <img
+    alt="moviePoster"
+    className="movieCardPoster"
+    src=""
+  />,
+  <div
+    className="movieDetails"
+  >
+    <div
+      className="movieDetailsHorizonalDisplay"
+    >
+      <p
+        className="titleText"
+        id="movieTitleInHeader"
+      >
+        Zootopia
+      </p>
+      <div
+        className="circle"
+      >
+        9.8
+      </div>
+    </div>
+    <p
+      className="movieDetailsGenre"
+    >
+      Drama, Comedy
+    </p>
+    <div
+      className="movieDetailsHorizonalDisplay"
+    >
+      <p
+        className="redText"
+      >
+        1994
+      </p>
+      <p
+        className="redText"
+      >
+        2
+        h 
+        0
+        min
+      </p>
+    </div>
+    <p>
+      Lorem Ipsum Some
+    </p>
+  </div>,
+]
+`;

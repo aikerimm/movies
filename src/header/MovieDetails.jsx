@@ -16,7 +16,9 @@ const MovieDetails = ({
       <img src={poster_path} alt='moviePoster' className='movieCardPoster' />
       <div className='movieDetails'>
         <div className='movieDetailsHorizonalDisplay'>
-          <p className='titleText'>{title}</p>
+          <p className='titleText' id='movieTitleInHeader'>
+            {title}
+          </p>
           <div className='circle'>{vote_average}</div>
         </div>
         <p className='movieDetailsGenre'>{genres.join(', ')}</p>

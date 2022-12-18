@@ -9,9 +9,6 @@ export const moviesSlice = createSlice({
     selectedMovie: null,
   },
   reducers: {
-    moviesLoaded: (state, action) => {
-      state.data = action.payload;
-    },
     movieSelected: (state, action) => {
       state.selectedMovie = action.payload;
     },
