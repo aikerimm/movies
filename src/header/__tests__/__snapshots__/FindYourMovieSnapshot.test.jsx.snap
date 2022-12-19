@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Find Your Movie renders correctly 1`] = `
+<div
+  className="findYourMovie"
+>
+  <p
+    className="titleText fullWidth"
+  >
+    Find your movie
+  </p>
+  <div
+    className="search"
+  >
+    <input
+      className="searchInput roundedCorners"
+      onChange={[Function]}
+      onKeyDown={[Function]}
+      placeholder="What do you want to watch?"
+      type="text"
+    />
+    <input
+      className="submitBtn roundedCorners"
+      onClick={[Function]}
+      type="button"
+      value="search"
+    />
+  </div>
+</div>
+`;

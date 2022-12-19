@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DeleteMovieModal should render correctly 1`] = `
+<div
+  className="overlay"
+  onClick={[MockFunction]}
+>
+  <div
+    className="deleteMovieModal"
+    onClick={[Function]}
+  >
+    <p
+      className="closeBtn"
+      onClick={[MockFunction]}
+    >
+      X
+    </p>
+    <p
+      className="titleText fullWidth"
+    >
+      Delete movie
+    </p>
+    <p
+      className="promptText"
+    >
+      Are you sure you want to delete this movie
+    </p>
+    <div
+      className="deleteConfirmDiv"
+    >
+      <input
+        className="submitBtn roundedCorners"
+        onClick={[Function]}
+        type="button"
+        value="confirm"
+      />
+    </div>
+  </div>
+</div>
+`;

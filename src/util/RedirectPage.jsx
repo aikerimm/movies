@@ -7,7 +7,7 @@ const RedirectPage = () => {
   useEffect(() => {
     navigate('/search');
   }, [navigate]);
-  return <div></div>;
+  return <div className='redText'></div>;
 };
 
 export default React.memo(RedirectPage);

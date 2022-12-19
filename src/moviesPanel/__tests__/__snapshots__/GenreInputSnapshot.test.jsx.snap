@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GenreInput should render correctly 1`] = `
+[
+  <input
+    checked={false}
+    id="genreComedy"
+    onChange={[Function]}
+    type="radio"
+  />,
+  <label
+    className="genreRadioOption"
+    htmlFor="genreComedy"
+  >
+    Comedy
+  </label>,
+]
+`;

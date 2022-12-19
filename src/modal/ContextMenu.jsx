@@ -28,7 +28,7 @@ const ContextMenu = ({ onClose, movie }) => {
         }
       });
     },
-    [onClose]
+    [onClose, navigate]
   );
 
   const handleEditModalClose = useCallback(() => {
@@ -56,7 +56,7 @@ const ContextMenu = ({ onClose, movie }) => {
 
   return (
     <div className='contextMenuDiv'>
-      <p className='closeBtn' onClick={onClose}>
+      <p id='contextMenuCloseButton' className='closeBtn' onClick={onClose}>
         X
       </p>
       <p
