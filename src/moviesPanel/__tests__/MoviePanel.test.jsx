@@ -1,33 +1,74 @@
 /**
  * @jest-environment jsdom
  */
-import { fireEvent, render } from '@testing-library/react';
-import { createMemoryRouter, MemoryRouter } from 'react-router-dom';
+
+import { render, waitFor, screen } from '@testing-library/react';
 import MoviesPanel from '../MoviesPanel.jsx';
+import { wrapWithReduxAndRouter } from '../../util/test-util.jsx';
+import userEvent from '@testing-library/user-event';
 
 describe('MoviesPanel tests', () => {
-  test('should call onClose on closeButton click', () => {
-    const onClose = jest.fn();
-    const FAKE_EVENT = { name: 'test event' };
-    const routes = [
-      {
-        path: '/search',
-        element: <MoviesPanel />,
-        loader: () => FAKE_EVENT,
-      },
-    ];
-    const router = createMemoryRouter(routes, { initialEntries: ['/search'] });
-    const contextMenu = render(
-      <MemoryRouter initialEntries={['/search']}>
-        <MoviesPanel />
-      </MemoryRouter>
-    );
+  test('should increment page', async () => {
+    const [component, testRouter] = wrapWithReduxAndRouter(<MoviesPanel />, '/search');
 
-    const pageIncrement = contextMenu.container.querySelector('#pageIncrement');
+    const moviesPanel = render(component);
 
-    fireEvent.click(pageIncrement);
+    await waitFor(() => screen.getByLabelText('Horror'));
 
-    expect(onClose).toHaveBeenCalledTimes(1);
-    console.log(router.state.location.pathname);
+    const pageIncrement = moviesPanel.container.querySelector('#pageIncrement');
+    await userEvent.click(pageIncrement);
+
+    expect(testRouter.state.location.search).toEqual('?page=2');
+  });
+
+  test('should decrement page', async () => {
+    const [component, testRouter] = wrapWithReduxAndRouter(<MoviesPanel />, '/search?page=2');
+
+    const moviesPanel = render(component);
+
+    await waitFor(() => screen.getByLabelText('Horror'));
+
+    const pageDecrement = moviesPanel.container.querySelector('#pageDecrement');
+    await userEvent.click(pageDecrement);
+
+    expect(testRouter.state.location.search).toEqual('?page=1');
+  });
+
+  test('should not decrement page if on the first page', async () => {
+    const [component, testRouter] = wrapWithReduxAndRouter(<MoviesPanel />, '/search');
+
+    const moviesPanel = render(component);
+
+    await waitFor(() => screen.getByLabelText('Horror'));
+
+    const pageDecrement = moviesPanel.container.querySelector('#pageDecrement');
+    await userEvent.click(pageDecrement);
+
+    expect(testRouter.state.location.search).toEqual('');
+  });
+
+  test('should update URL on genre change', async () => {
+    const [component, testRouter] = wrapWithReduxAndRouter(<MoviesPanel />, '/search');
+
+    const moviesPanel = render(component);
+
+    await waitFor(() => screen.getByLabelText('Horror'));
+
+    const genreComedyRadio = moviesPanel.container.querySelector('#genreComedy');
+    await userEvent.click(genreComedyRadio);
+
+    expect(testRouter.state.location.search).toEqual('?genre=Comedy');
+  });
+
+  test('should update URL on sort change', async () => {
+    const [component, testRouter] = wrapWithReduxAndRouter(<MoviesPanel />, '/search');
+
+    render(component);
+
+    await waitFor(() => screen.getByLabelText('Horror'));
+
+    await userEvent.selectOptions(screen.getByRole('combobox'), ['title']);
+
+    expect(testRouter.state.location.search).toEqual('?sortBy=title&sortDir=asc');
   });
 });

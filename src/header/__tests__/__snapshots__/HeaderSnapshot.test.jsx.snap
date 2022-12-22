@@ -36,6 +36,7 @@ exports[`Header renders correctly 1`] = `
     >
       <input
         className="searchInput roundedCorners"
+        id="searchInput"
         onChange={[Function]}
         onKeyDown={[Function]}
         placeholder="What do you want to watch?"
