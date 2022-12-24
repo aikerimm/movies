@@ -2,7 +2,12 @@ export const sendEditMovieRequest = (values, id) => {
   const requestOptions = {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ ...values, id: id }),
+    body: JSON.stringify({
+      ...values,
+      id: id,
+      vote_average: Number(values.vote_average),
+      runtime: Number(values.runtime),
+    }),
   };
   return fetch('http://localhost:4000/movies', requestOptions);
 };

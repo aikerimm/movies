@@ -18,7 +18,7 @@ const MovieDetailsHeader = () => {
 
   const movie = useSelector(getSelectedMovie);
   return (
-    <div className='movieDetailsHeader'>
+    <div className='movieDetailsHeader' id='movieDetailsHeader'>
       <div className='movieDetailsTopPanel'>
         <p className='headerTitle'>
           <b>netflix</b>roulette
@@ -28,6 +28,7 @@ const MovieDetailsHeader = () => {
           alt='searchIcon'
           onClick={onSearchClick}
           className='searchIcon'
+          id='searchIcon'
         />
       </div>
       <div className='movieDetailsContent'>

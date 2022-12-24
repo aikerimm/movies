@@ -35,6 +35,7 @@ const FindYourMovie = () => {
           value={searchInput}
           onChange={handleInputChange}
           onKeyDown={handleEnterOnSearch}
+          id='searchInput'
         ></input>
         <Button value='search' type='submit' onClick={onSearchClick} />
       </div>

@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header renders correctly 1`] = `
+<div
+  className="header"
+  id="searchHeader"
+>
+  <div
+    className="headerTop"
+  >
+    <p
+      className="headerTitle"
+    >
+      <b>
+        netflix
+      </b>
+      roulette
+    </p>
+    <input
+      className="addBtn roundedCorners"
+      onClick={[Function]}
+      type="button"
+      value="+ Add movie"
+    />
+  </div>
+  <div
+    className="findYourMovie"
+  >
+    <p
+      className="titleText fullWidth"
+    >
+      Find your movie
+    </p>
+    <div
+      className="search"
+    >
+      <input
+        className="searchInput roundedCorners"
+        id="searchInput"
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        placeholder="What do you want to watch?"
+        type="text"
+      />
+      <input
+        className="submitBtn roundedCorners"
+        onClick={[Function]}
+        type="button"
+        value="search"
+      />
+    </div>
+  </div>
+</div>
+`;

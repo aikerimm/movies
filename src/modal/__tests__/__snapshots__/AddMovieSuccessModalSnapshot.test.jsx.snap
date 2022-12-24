@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddMovieSuccessModal should render correctly 1`] = `
+<div
+  className="overlay successOverlay"
+  onClick={[MockFunction]}
+>
+  <div
+    className="successContainer"
+    onClick={[Function]}
+  >
+    <img
+      alt="success"
+      className="successIcon"
+      src="/success.svg"
+    />
+    <p
+      className="closeBtn"
+      onClick={[MockFunction]}
+    >
+      X
+    </p>
+    <p
+      className="titleText"
+    >
+      Congratulations!
+    </p>
+    <p
+      className="promptText"
+    >
+      The movie has been added to database successfully
+    </p>
+  </div>
+</div>
+`;

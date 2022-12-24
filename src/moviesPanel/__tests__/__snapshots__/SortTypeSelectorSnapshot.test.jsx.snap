@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SortTypeSelector should render correctly 1`] = `
+<div
+  className="sortTypeSelect"
+>
+  <label
+    className="sortTypeLabel"
+    htmlFor="sortType"
+  >
+    Sort by
+  </label>
+  <select
+    id="sortType"
+    name="sortType"
+    onChange={[Function]}
+    value="TITLE"
+  >
+    <option
+      value=""
+    >
+      Select: 
+    </option>
+    <option
+      value="release_date"
+    >
+      Release Date
+    </option>
+    <option
+      value="title"
+    >
+      Title
+    </option>
+    <option
+      value="vote_average"
+    >
+      Rating
+    </option>
+  </select>
+  <div
+    onClick={[Function]}
+  >
+    <span
+      className="sortDirection"
+    >
+      ⇑
+    </span>
+  </div>
+</div>
+`;

@@ -8,6 +8,7 @@ import { getSelectedMovie } from './util/moviesSlice';
 
 const App = () => {
   const selectedMovie = useSelector(getSelectedMovie);
+  console.log('render app ' + selectedMovie);
 
   return (
     <>

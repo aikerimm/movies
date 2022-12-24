@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MovieCard renders correctly 1`] = `
+[
+  <p
+    className="moviesCounter"
+  >
+    1
+     movies found
+  </p>,
+  <div
+    className="moviesList"
+    id="moviesList"
+  >
+    <div
+      className="movieCard"
+    >
+      <img
+        alt="moviePoster"
+        className="movieCardPoster"
+        onClick={[Function]}
+        src=""
+      />
+      <div
+        className="titleYear"
+      >
+        <p
+          className="movieCardTitle"
+        >
+          Zootopia
+        </p>
+        <p
+          className="movieCardYear"
+        >
+          1994
+        </p>
+      </div>
+      <p
+        className="movieCardGenre"
+      >
+        Drama, Comedy
+      </p>
+      <img
+        alt="contextMenu"
+        className="contextMenuIcon"
+        id="contextMenuIcon"
+        onClick={[Function]}
+        src="/contextMenu.svg"
+      />
+    </div>
+  </div>,
+]
+`;

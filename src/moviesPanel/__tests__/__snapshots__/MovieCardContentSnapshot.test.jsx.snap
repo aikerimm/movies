@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MovieCardContent should render correctly 1`] = `
+[
+  <img
+    alt="moviePoster"
+    className="movieCardPoster"
+    onClick={[MockFunction]}
+    src=""
+  />,
+  <div
+    className="titleYear"
+  >
+    <p
+      className="movieCardTitle"
+    >
+      Dune
+    </p>
+    <p
+      className="movieCardYear"
+    >
+      1995
+    </p>
+  </div>,
+  <p
+    className="movieCardGenre"
+  >
+    Action, Drama
+  </p>,
+]
+`;

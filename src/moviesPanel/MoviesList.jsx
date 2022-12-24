@@ -8,7 +8,7 @@ const MoviesList = () => {
   return (
     <>
       <p className='moviesCounter'>{movies.totalAmount} movies found</p>
-      <div className='moviesList'>
+      <div className='moviesList' id='moviesList'>
         {movies.data.map((movie) => (
           <MovieCard key={movie.id} movie={movie} />
         ))}

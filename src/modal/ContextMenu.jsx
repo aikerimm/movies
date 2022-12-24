@@ -17,12 +17,18 @@ const ContextMenu = ({ onClose, movie }) => {
 
   const handleEditModalSubmit = useCallback(
     (values, id) => {
-      return sendEditMovieRequest(values, id)
-        .then(setOpenEditModal(false))
-        .then(onClose())
-        .then(window.location.reload());
+      return sendEditMovieRequest(values, id).then((response) => {
+        if (response.status == 200) {
+          setOpenEditModal(false);
+          onClose();
+          navigate(0);
+        } else {
+          console.log(JSON.stringify(response));
+          alert('Error editing movie. See console.');
+        }
+      });
     },
-    [onClose]
+    [onClose, navigate]
   );
 
   const handleEditModalClose = useCallback(() => {
@@ -37,21 +43,20 @@ const ContextMenu = ({ onClose, movie }) => {
 
   const handleDeleteModalSubmit = useCallback(
     async (movieId) => {
-      await sendDeleteMovieRequest(movieId)
-        .then((response) => {
-          if (response.status == 204) {
-            navigate(0);
-          } else {
-            alert('Error deleting movie. See network tab.');
-          }
-        });
+      await sendDeleteMovieRequest(movieId).then((response) => {
+        if (response.status == 204) {
+          navigate(0);
+        } else {
+          alert('Error deleting movie. See network tab.');
+        }
+      });
     },
     [navigate]
   );
 
   return (
     <div className='contextMenuDiv'>
-      <p className='closeBtn' onClick={onClose}>
+      <p id='contextMenuCloseButton' className='closeBtn' onClick={onClose}>
         X
       </p>
       <p
