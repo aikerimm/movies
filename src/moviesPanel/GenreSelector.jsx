@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import GenreInput from './GenreInput';
+import GenreInput from './GenreInput.jsx';
 
 const genres = ['All', 'Drama', 'Comedy', 'Adventure', 'Horror'];
 

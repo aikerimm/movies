@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import './movieCard.css';
 import ContextMenu from '../modal/ContextMenu.jsx';
-import MovieCardContent from './MovieCardContent';
+import MovieCardContent from './MovieCardContent.jsx';
 import { fetchMovie } from '../util/moviesSlice.jsx';
 import { useSearchParams } from 'react-router-dom';
 

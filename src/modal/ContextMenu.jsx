@@ -7,7 +7,7 @@ import React from 'react';
 import {
   sendDeleteMovieRequest,
   sendEditMovieRequest,
-} from '../util/apiService';
+} from '../util/apiService.jsx';
 import { useNavigate } from 'react-router';
 
 const ContextMenu = ({ onClose, movie }) => {
@@ -23,7 +23,7 @@ const ContextMenu = ({ onClose, movie }) => {
           onClose();
           navigate(0);
         } else {
-          console.log(JSON.stringify(response));
+          console.error(JSON.stringify(response));
           alert('Error editing movie. See console.');
         }
       });

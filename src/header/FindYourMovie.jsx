@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import Button from '../util/Button';
+import Button from '../util/Button.jsx';
 import React from 'react';
 
 const FindYourMovie = () => {

@@ -1,7 +1,7 @@
-import MovieCard from './MovieCard';
+import MovieCard from './MovieCard.jsx';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { getMoviesData } from '../util/moviesSlice';
+import { getMoviesData } from '../util/moviesSlice.jsx';
 
 const MoviesList = () => {
   const movies = useSelector(getMoviesData);

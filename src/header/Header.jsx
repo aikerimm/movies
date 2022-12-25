@@ -1,10 +1,10 @@
 import React, { useCallback, useState } from 'react';
 import './header.css';
 import MovieModal from '../modal/MovieModal.jsx';
-import Button from '../util/Button';
+import Button from '../util/Button.jsx';
 import AddMovieSuccessModal from '../modal/AddMovieSuccessModal.jsx';
-import { sendAddMovieRequest } from '../util/apiService';
-import FindYourMovie from './FindYourMovie';
+import { sendAddMovieRequest } from '../util/apiService.jsx';
+import FindYourMovie from './FindYourMovie.jsx';
 import { useNavigate } from 'react-router';
 
 const Header = () => {

@@ -1,6 +1,6 @@
 import './header.css';
 import './movieDetails.css';
-import MovieDetails from './MovieDetails';
+import MovieDetails from './MovieDetails.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSelectedMovie, movieSelected } from '../util/moviesSlice.jsx';
 import { useCallback } from 'react';
