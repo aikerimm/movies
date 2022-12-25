@@ -1,18 +1,22 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 const webpackNodeExternals = require('webpack-node-externals');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   target: 'node',
   entry: './server.js',
   mode: 'development',
   plugins: [
-    new MiniCssExtractPlugin()
+    new MiniCssExtractPlugin(),
+    new CopyPlugin({
+      patterns: [{ from: 'src/assets', to: '' }],
+    }),
   ],
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'build'),
-    publicPath: '/build',
+    publicPath: '/build/',
   },
   module: {
     rules: [

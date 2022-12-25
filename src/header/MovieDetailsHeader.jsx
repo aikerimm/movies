@@ -1,41 +1,40 @@
 import './header.css';
 import './movieDetails.css';
 import MovieDetails from './MovieDetails.jsx';
-import { useDispatch, useSelector } from 'react-redux';
-import { getSelectedMovie, movieSelected } from '../util/moviesSlice.jsx';
-import { useCallback } from 'react';
+import { fetchMovie } from '../util/moviesSlice.jsx';
 import { useSearchParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-const MovieDetailsHeader = () => {
-  const dispatch = useDispatch();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const onSearchClick = useCallback(() => {
-    dispatch(movieSelected(null));
-    let newSearchParams = new URLSearchParams(searchParams);
-    newSearchParams.delete('movie');
-    setSearchParams(newSearchParams);
-  }, [searchParams, setSearchParams, dispatch]);
+const MovieDetailsHeader = ({ movieId }) => {
+  const [searchParams] = useSearchParams();
 
-  const movie = useSelector(getSelectedMovie);
+  let newSearchParams = new URLSearchParams(searchParams);
+  newSearchParams.delete('movie');
+  const onCloseLink = '?' + newSearchParams.toString();
+
+  const movie = fetchMovie(movieId);
   return (
     <div className='movieDetailsHeader' id='movieDetailsHeader'>
       <div className='movieDetailsTopPanel'>
         <p className='headerTitle'>
           <b>netflix</b>roulette
         </p>
-        <img
+        <a href={onCloseLink}><img
           src='/searchIcon.svg'
           alt='searchIcon'
-          onClick={onSearchClick}
           className='searchIcon'
           id='searchIcon'
-        />
+        /></a>
       </div>
       <div className='movieDetailsContent'>
         <MovieDetails movie={movie} />
       </div>
     </div>
   );
+};
+
+MovieDetailsHeader.propTypes = {
+  movieId: PropTypes.string,
 };
 
 export default MovieDetailsHeader;

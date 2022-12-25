@@ -2,15 +2,33 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Pagination = ({ page, onPageDecrement, onPageIncrement }) => {
+  const pageDecrement = onPageDecrement();
+  const pageIncrement = onPageIncrement();
   return (
     <div className='pagination'>
-      <div id='pageDecrement' alt='pageDecrement' className='circle' onClick={onPageDecrement}>
-        &lt;
+      <a href={pageDecrement}>
+        <div
+          id='pageDecrement'
+          alt='pageDecrement'
+          className='circle'
+          onClick={onPageDecrement}
+        >
+          &lt;
+        </div>
+      </a>
+      <div className='circle' id='currentPage'>
+        {page}
       </div>
-      <div className='circle' id='currentPage'>{page}</div>
-      <div id='pageIncrement' alt='pageIncrement' className='circle' onClick={onPageIncrement}>
-        &gt;
-      </div>
+      <a href={pageIncrement}>
+        <div
+          id='pageIncrement'
+          alt='pageIncrement'
+          className='circle'
+          onClick={onPageIncrement}
+        >
+          &gt;
+        </div>
+      </a>
     </div>
   );
 };

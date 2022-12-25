@@ -1,10 +1,8 @@
 import React, { useCallback, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import './movieCard.css';
 import ContextMenu from '../modal/ContextMenu.jsx';
 import MovieCardContent from './MovieCardContent.jsx';
-import { fetchMovie } from '../util/moviesSlice.jsx';
 import { useSearchParams } from 'react-router-dom';
 
 const MovieCard = ({ movie }) => {
@@ -15,14 +13,13 @@ const MovieCard = ({ movie }) => {
     () => setOpenContextMenu(false),
     []
   );
-  const dispatch = useDispatch();
   const onMovieCardClick = useCallback(() => {
+    process.stderr.write('on movie card click\n');
     let newSearchParams = new URLSearchParams(searchParams);
     newSearchParams.set('movie', movie.id);
     setSearchParams(newSearchParams);
-    dispatch(fetchMovie(movie.id));
     window.scroll(0, 0);
-  }, [dispatch, movie.id, searchParams, setSearchParams]);
+  }, [movie.id, searchParams, setSearchParams]);
 
   return (
     <div className='movieCard'>

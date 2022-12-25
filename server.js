@@ -3,24 +3,29 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom/server';
 import bodyParser from 'body-parser';
-import { Provider } from 'react-redux';
-import store from './src/util/store.jsx';
 import App from './src/App.jsx';
+import { MoviesContext } from './src/util/MoviesContext.jsx';
+import { Routes, Route } from 'react-router-dom';
 
 const app = express();
 const PORT = 3000;
 
 app.use(bodyParser.json());
 app.use(express.static('build'));
+global.syncRequest = require('sync-request');
 
 app.get('*', (req, resp) => {
   const context = {};
+
   const content = ReactDOMServer.renderToString(
-    <Provider store={store}>
+    <MoviesContext.Provider>
       <StaticRouter location={req.url} context={context}>
-        <App />
+        <Routes>
+          <Route exact path='/' element={<App />} />
+          <Route path='/search' element={<App />} />
+        </Routes>
       </StaticRouter>
-    </Provider>
+    </MoviesContext.Provider>
   );
   const html = `
     <html>
