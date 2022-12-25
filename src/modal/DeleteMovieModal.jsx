@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import './deleteMovieModal.css';
-import Button from '../util/Button';
+import Button from '../util/Button.jsx';
 import { useCallback } from 'react';
 
 const DeleteMovieModal = ({ open, onClose, movieId, onDelete }) => {

@@ -1,18 +1,20 @@
-import './app.css';
-import Header from './header/Header.jsx';
+import './App.css';
 import Footer from './footer/Footer.jsx';
+import MovieDetailsHeader from './header/MovieDetailsHeader.jsx';
+import Header from './header/Header.jsx';
 import MoviesPanel from './moviesPanel/MoviesPanel.jsx';
-import MovieDetailsHeader from './header/MovieDetailsHeader';
-import { useSelector } from 'react-redux';
-import { getSelectedMovie } from './util/moviesSlice';
+import { useSearchParams } from 'react-router-dom';
 
 const App = () => {
-  const selectedMovie = useSelector(getSelectedMovie);
-  console.log('render app ' + selectedMovie);
+  const [searchParams] = useSearchParams();
 
   return (
     <>
-      {selectedMovie ? <MovieDetailsHeader /> : <Header />}
+      {searchParams.get('movie') ? (
+        <MovieDetailsHeader movieId={searchParams.get('movie')} />
+      ) : (
+        <Header />
+      )}
       <MoviesPanel />
       <Footer />
     </>

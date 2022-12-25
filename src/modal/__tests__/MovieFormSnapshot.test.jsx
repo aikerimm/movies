@@ -7,9 +7,7 @@ import MovieForm from '../MovieForm.jsx';
 import { testMovie } from '../../util/test-util.jsx';
 
 it('MovieForm renders correctly', () => {
-  const onMovieFormSubmit = () => {
-    console.log('test');
-  };
+  const onMovieFormSubmit = jest.fn();
   const tree = renderer
     .create(
       <MovieForm movie={testMovie} onMovieFormSubmit={onMovieFormSubmit} />

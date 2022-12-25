@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import '../app.css';
+import '../App.css';
 import React from 'react';
 
 const Button = ({ value, type, onClick, isFormSubmit = false }) => {

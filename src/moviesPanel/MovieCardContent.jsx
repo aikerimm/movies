@@ -1,15 +1,22 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 const MovieCardContent = ({ movie, onMovieCardClick }) => {
+  const [searchParams] = useSearchParams();
+  let newSearchParams = new URLSearchParams(searchParams);
+  newSearchParams.set('movie', movie.id);
+  const link = '?' + newSearchParams.toString();
   return (
     <>
-      <img
-        src={movie.poster_path}
-        alt='moviePoster'
-        className='movieCardPoster'
-        onClick={onMovieCardClick}
-      />
+      <a href={link}>
+        <img
+          src={movie.poster_path}
+          alt='moviePoster'
+          className='movieCardPoster'
+          onClick={onMovieCardClick}
+        />
+      </a>
       <div className='titleYear'>
         <p className='movieCardTitle'>{movie.title}</p>
         <p className='movieCardYear'>{movie.release_date.substring(0, 4)}</p>
@@ -27,7 +34,7 @@ MovieCardContent.propTypes = {
     release_date: PropTypes.string.isRequired,
     genres: PropTypes.arrayOf(PropTypes.string).isRequired,
   }),
-  onMovieCardClick: PropTypes.func.isRequired
+  onMovieCardClick: PropTypes.func.isRequired,
 };
 
 export default React.memo(MovieCardContent);

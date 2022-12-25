@@ -1,20 +1,22 @@
-import MovieCard from './MovieCard';
+import MovieCard from './MovieCard.jsx';
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { getMoviesData } from '../util/moviesSlice';
+import PropTypes from 'prop-types';
 
-const MoviesList = () => {
-  const movies = useSelector(getMoviesData);
+const MoviesList = ({data}) => {
   return (
     <>
-      <p className='moviesCounter'>{movies.totalAmount} movies found</p>
+      <p className='moviesCounter'>{data.totalAmount} movies found</p>
       <div className='moviesList' id='moviesList'>
-        {movies.data.map((movie) => (
+        {data.data.map((movie) => (
           <MovieCard key={movie.id} movie={movie} />
         ))}
       </div>
     </>
   );
+};
+
+MoviesList.propTypes = {
+  data: PropTypes.object
 };
 
 export default React.memo(MoviesList);

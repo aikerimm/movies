@@ -16,22 +16,29 @@ const SortTypeSelector = ({ sortType, sortDirection, onSortChanged }) => {
         value={sortType || ''}
       >
         <option value=''>Select: </option>
-        <option value='release_date'>Release Date</option>
-        <option value='title'>Title</option>
-        <option value='vote_average'>Rating</option>
+        <a href={onSortChanged('release_date', sortDirection)}>
+          {' '}
+          <option value='release_date'>Release Date</option>
+        </a>
+        <a href={onSortChanged('title', sortDirection)}>
+          <option value='title'>Title</option>
+        </a>
+        <a href={onSortChanged('vote_average', sortDirection)}>
+          <option value='vote_average'>Rating</option>
+        </a>
       </select>
-      <div
-        onClick={() =>
-          onSortChanged(
-            sortType ? sortType : 'release_date',
-            sortDirection === 'asc' ? 'desc' : 'asc'
-          )
-        }
+      <a
+        href={onSortChanged(
+          sortType ? sortType : 'release_date',
+          sortDirection === 'asc' ? 'desc' : 'asc'
+        )}
       >
-        <span className='sortDirection'>
-          {sortDirection === 'asc' ? '⇑' : '⇓'}
-        </span>
-      </div>
+        <div>
+          <span className='sortDirection'>
+            {sortDirection === 'asc' ? '⇑' : '⇓'}
+          </span>
+        </div>
+      </a>
     </div>
   );
 };

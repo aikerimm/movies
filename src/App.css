@@ -95,3 +95,17 @@ select {
   width: 245px;
   height: 350px;
 }
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  background-color: #888888;
+}
+
+.redText {
+  color: #f65261;
+}

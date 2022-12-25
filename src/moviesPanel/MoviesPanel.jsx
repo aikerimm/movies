@@ -1,82 +1,75 @@
 /* eslint-disable require-jsdoc */
-import React, { useCallback } from 'react';
 import MoviesList from './MoviesList.jsx';
 import './moviesPanel.css';
 import ErrorBoundary from '../util/ErrorBoundary.jsx';
 import Pagination from './Pagination.jsx';
 import GenreSelector from './GenreSelector.jsx';
 import SortTypeSelector from './SortTypeSelector.jsx';
-import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
-import { useLoaderData, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
+import { fetchMovies } from '../util/moviesSlice.jsx';
+import React from 'react';
 
 const MoviesPanel = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
-  const onPageDecrement = useCallback(() => {
+  const getLinkForPageDecrement = () => {
     let newPage = (Number.parseInt(searchParams.get('page')) || 1) - 1;
-    if (newPage < 1) return;
     let newSearchParams = new URLSearchParams(searchParams);
     newSearchParams.set('page', newPage);
-    setSearchParams(newSearchParams);
-  }, [searchParams, setSearchParams]);
-  const onPageIncrement = useCallback(() => {
-    let newPage = (Number.parseInt(searchParams.get('page')) || 1) + 1;
-    let newSearchParams = new URLSearchParams(searchParams);
+    return '?' + newSearchParams.toString();
+  };
+
+  const getLinkForPageIncrement = () => {
+    const newPage = (Number.parseInt(searchParams.get('page')) || 1) + 1;
+    const newSearchParams = new URLSearchParams(searchParams);
     newSearchParams.set('page', newPage);
-    setSearchParams(newSearchParams);
-  }, [searchParams, setSearchParams]);
+    return '?' + newSearchParams.toString();
+  };
 
-  const onGenreChanged = useCallback(
-    (newGenre) => {
-      let newSearchParams = new URLSearchParams(searchParams);
-      newSearchParams.set('genre', newGenre);
-      setSearchParams(newSearchParams);
-    },
-    [searchParams, setSearchParams]
-  );
+  const getLinkForGenreChange = (newGenre) => {
+    const newSearchParams = new URLSearchParams(searchParams);
+    newSearchParams.set('genre', newGenre);
+    return '?' + newSearchParams.toString();
+  };
 
-  const onSortChanged = useCallback(
-    (newSort, newDirection) => {
-      let newSearchParams = new URLSearchParams(searchParams);
-      newSearchParams.set('sortBy', newSort);
-      newSearchParams.set('sortDir', newDirection);
-      setSearchParams(newSearchParams);
-    },
-    [searchParams, setSearchParams]
-  );
+  const getLinkForSortChange = (newSort, newDirection) => {
+    const newSearchParams = new URLSearchParams(searchParams);
+    newSearchParams.set('sortBy', newSort);
+    newSearchParams.set('sortDir', newDirection);
+    return '?' + newSearchParams.toString();
+  };
 
-  const dispatch = useDispatch();
-  const thunks = useLoaderData();
-  useEffect(() => {
-    thunks.moviesThunk && dispatch(thunks.moviesThunk);
-    thunks.movieThunk && dispatch(thunks.movieThunk);
-  }, [dispatch, thunks]);
+  const movies = fetchMovies({
+    query: searchParams.get('searchQuery'),
+    genre: searchParams.get('genre'),
+    sortType: searchParams.get('sortBy'),
+    sortDirection: searchParams.get('sortDir'),
+    page: searchParams.get('page'),
+  });
 
   const currentGenre = searchParams.get('genre') || 'All';
   const currentSortType = searchParams.get('sortBy');
   const currentSortDirection = searchParams.get('sortDir') || 'asc';
   const currentPage = Number.parseInt(searchParams.get('page')) || 1;
-
   return (
     <div className='moviesPanel'>
       <div className='moviesPanelSelectors'>
         <GenreSelector
           currentGenre={currentGenre}
-          onGenreChanged={onGenreChanged}
+          onGenreChanged={getLinkForGenreChange}
         />
         <SortTypeSelector
           sortType={currentSortType}
           sortDirection={currentSortDirection}
-          onSortChanged={onSortChanged}
+          onSortChanged={getLinkForSortChange}
         />
       </div>
-      <ErrorBoundary>
-        <MoviesList />
+      <ErrorBoundary data={movies}>
+        <MoviesList data={movies} />
         <Pagination
           page={currentPage}
-          onPageDecrement={onPageDecrement}
-          onPageIncrement={onPageIncrement}
+          onPageDecrement={getLinkForPageDecrement}
+          onPageIncrement={getLinkForPageIncrement}
         />
       </ErrorBoundary>
     </div>

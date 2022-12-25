@@ -1,18 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const GenreInput = ({genre, onGenreChanged, currentGenre}) => {
+const GenreInput = ({ genre, onGenreChanged, currentGenre }) => {
+  process.stderr.write(onGenreChanged(genre));
   return (
     <>
-      <input
-        id={`genre${genre}`}
-        type='radio'
-        checked={currentGenre === genre}
-        onChange={() => onGenreChanged(genre)}
-      />
-      <label htmlFor={`genre${genre}`} className='genreRadioOption'>
-        {genre}
-      </label>
+      <a href={onGenreChanged(genre)}>
+        <input
+          id={`genre${genre}`}
+          type='radio'
+          checked={currentGenre === genre}
+          onChange={onGenreChanged}
+        />
+
+        <label htmlFor={`genre${genre}`} className='genreRadioOption'>
+          {genre}
+        </label>
+      </a>
     </>
   );
 };
@@ -20,7 +24,7 @@ const GenreInput = ({genre, onGenreChanged, currentGenre}) => {
 GenreInput.propTypes = {
   genre: PropTypes.string.isRequired,
   onGenreChanged: PropTypes.func.isRequired,
-  currentGenre: PropTypes.string.isRequired
+  currentGenre: PropTypes.string.isRequired,
 };
 
 export default React.memo(GenreInput);

@@ -1,7 +1,7 @@
 import { useFormik } from 'formik';
 import PropTypes from 'prop-types';
-import Button from '../util/Button';
-import allGenres from '../util/allGenres';
+import Button from '../util/Button.jsx';
+import allGenres from '../util/allGenres.jsx';
 
 const validate = (values) => {
   let text = '';

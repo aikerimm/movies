@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import './movieModal.css';
 import React from 'react';
-import MovieForm from './MovieForm';
+import MovieForm from './MovieForm.jsx';
 
 const MovieModal = ({ onClose, modalTitle, onSubmit, movie }) => {
   return (
